@@ -1,9 +1,9 @@
-name: Publish campus
+name: Deploy PKU-3D
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['app/**', 'scripts/**', 'VERSION', '.github/workflows/pages.yml']
+    paths: ['app/**', 'scripts/**', 'VERSION', 'LICENSE', 'DATA_LICENSE.md', '.github/workflows/pages.yml']
 permissions:
   contents: read
   pages: write
