@@ -1,0 +1,23 @@
+name: 校园纠错
+description: 帮助校对建筑、入口、院落或道路
+title: "[校园纠错] "
+body:
+  - type: input
+    id: place
+    attributes:
+      label: 地点名称
+      placeholder: 例如：19 号楼西门
+    validations:
+      required: true
+  - type: textarea
+    id: correction
+    attributes:
+      label: 哪里不对？正确的关系是什么？
+      description: 尽量说明方向、相邻建筑或入口位置；可以拖入圈注截图。
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 可选的参考依据
+      description: 亲历描述或公开资料链接；请注明方向与时间。参考照片和视频不提交到源码仓库。

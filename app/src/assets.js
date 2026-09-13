@@ -1,0 +1,1 @@
+YY.ASSETS={"satellite":"assets/campus-imagery.jpg","standard":"assets/campus-street.png","periphery":{"west":{"satellite":"assets/periphery32/west-satellite.jpg","standard":"assets/periphery32/west-standard.png"},"east":{"satellite":"assets/periphery32/east-satellite.jpg","standard":"assets/periphery32/east-standard.png"}}};

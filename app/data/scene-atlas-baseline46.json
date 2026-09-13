@@ -1,0 +1,6 @@
+{
+  "sourceHash": "af0168c028e34ae7dbff2d4daabd8116367f5baba0c21084319a8ce1e8059ea3",
+  "path": "assets/scene-atlas-baseline46.png",
+  "sha256": "cd1a7085b6abab12b287301e54706309f1fda80040a668eb9b6bbe6060890521",
+  "note": "Original V46 runtime sign atlas, captured before performance changes. Reuse only while every atlas-producing input remains unchanged."
+}

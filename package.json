@@ -1,0 +1,24 @@
+{
+  "name": "pku-3d",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Interactive 3D model of Peking University, built with GPT-6 Astra using publicly available data",
+  "scripts": {
+    "setup": "python3 scripts/assets.py setup",
+    "dev": "python3 scripts/serve.py",
+    "dev:references": "python3 scripts/serve.py --references",
+    "build": "python3 app/build.py --cached",
+    "build:scene": "python3 app/build.py",
+    "assets:pack": "python3 scripts/assets.py pack",
+    "test": "node --test app/tests/adjacent-draw46.test.cjs app/tests/instance-transfer46.test.cjs app/tests/provoking-vertex46.test.cjs app/tests/scene-unshuffle46.test.cjs app/tests/uniform-cache46.test.cjs app/tests/visibility-direct-stream46.test.cjs app/tests/visibility-scratch46.test.cjs app/tests/visibility-groups46.test.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sldyns/PKU-3D.git"
+  },
+  "homepage": "https://sldyns.github.io/PKU-3D/"
+}

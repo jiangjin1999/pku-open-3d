@@ -1,0 +1,21 @@
+(function(Y){'use strict';const F=Y.Footprints,G=Y.Geo,A=Y.Architecture30,previous=A.render,ID='way/240832243';
+const O=[-292.764,468.443],R=Math.atan2(1.077,41.702),CO=Math.cos(R),SI=Math.sin(R),H={low:4.4,main:9,total:9.2};
+const world=(u,v)=>[O[0]+u*CO+v*SI,O[1]-u*SI+v*CO],local=p=>[(p[0]-O[0])*CO-(p[1]-O[1])*SI,(p[0]-O[0])*SI+(p[1]-O[1])*CO];
+function clip(p,a,k,greater){const out=[];for(let i=0;i<p.length;i++){const s=p[i],e=p[(i+1)%p.length],si=greater?s[a]>=k:s[a]<=k,ei=greater?e[a]>=k:e[a]<=k;if(si)out.push(s);if(si!==ei){const t=(k-s[a])/(e[a]-s[a]);out.push(s.map((x,j)=>x+t*(e[j]-x)));}}return out;}
+function pieces(f,box){const out=[];for(const pg of F.polygons(f.geometry))for(const tri of F.capTriangles(pg)){let p=tri.map(local);for(const [a,k,g] of [[0,box[0],true],[0,box[2],false],[1,box[1],true],[1,box[3],false]])if(p.length)p=clip(p,a,k,g);if(p.length>=3&&Math.abs(F.area([...p,p[0]]))>1e-8)out.push(p);}return out;}
+
+
+function render(b,f,add){const id=f.properties.pickId;b.id=id;const VERT=(u,y,v)=>{const p=world(u,v);return[p[0],y,p[1]];};
+const group=(key,fn)=>{const old=b.e.add;b.e.add=function(k,...v){return old.call(this,'035-'+key+'-'+k,...v);};try{fn();}finally{b.e.add=old;}};
+for(const z of[{name:'west-low',box:[-1,-1,14,34],h:H.low,c:'#7e857a'},{name:'east-main',box:[14,-1,44,34],h:H.main,c:'#9ba192'}]){const g=new G.Geometry();for(const p of pieces(f,z.box))for(let i=1;i<p.length-1;i++)g.tri(...[p[0],p[i],p[i+1]].map(p=>VERT(p[0],z.h,p[1])));add('035-flat-roof-'+z.name,g,z.c,24,id);}
+const ring=F.polygons(f.geometry)[0][0],positive=F.area(ring)>0;for(let i=1;i<ring.length;i++){let a=ring[i-1],c=ring[i];if(positive)[a,c]=[c,a];const la=local(a),lc=local(c),dx=c[0]-a[0],dz=c[1]-a[1],len=Math.hypot(dx,dz),east=(la[0]+lc[0])/2>40;
+b.local(a[0],0,a[1],Math.atan2(-dz,dx),()=>group(east?'east-main':'secondary-'+i,()=>{const panel=(s,e,lo,hi,col='#b8bdb5')=>{if(e>s&&hi>lo)b.box((s+e)/2,(lo+hi)/2,-.045,e-s,hi-lo,.09,col,24);};const win=(s,e,lo,hi)=>{const w=e-s,x=(s+e)/2;for(const xx of[s,e])b.box(xx,(lo+hi)/2,-.15,.08,hi-lo,.30,'#656e68',24);for(const yy of[lo,hi])b.box(x,yy,-.15,w,.08,.30,'#656e68',24);b.box(x,(lo+hi)/2,-.34,w-.12,hi-lo-.1,.05,'#596f73',5);for(let y=lo+.52;y<hi;y+=.52)b.box(x,y,-.285,w,.055,.07,'#89938c',24);};
+if(east){const centres=[.165,.356,.451,.547,.640,.827].map(t=>t*len),ww=len*.054;let cursor=0;for(const x of centres){const s=x-ww/2,e=x+ww/2;panel(cursor,s,4.25,9);panel(s,e,4.25,5.72);panel(s,e,8.62,9);win(s,e,5.72,8.62);b.box(s-.25,6.64,.12,.16,4.4,.26,'#747f74',24);b.box(e+.25,6.64,.12,.16,4.4,.26,'#747f74',24);cursor=e;}panel(cursor,len,4.25,9);
+const ds=len*.30,de=len*.70;panel(0,ds,0,4.25);panel(de,len,0,4.25);panel(ds,de,3.65,4.25);b.box(len/2,4.22,1.05,len*.51,.19,2.35,'#d6d9ca',24);group('entrance',()=>{b.box(len/2,.10,1.05,len*.45,.2,2.2,'#b9c0b1',24);for(const x of[ds,de])b.box(x,1.91,-.10,.12,3.48,.22,'#667268',24);b.box(len/2,1.9,-.29,de-ds-.18,3.4,.05,'#91a6a1',5);for(let k=1;k<4;k++)b.box(ds+(de-ds)*k/4,1.9,-.24,.065,3.4,.08,'#647469',24);});
+b.box(len/2,4.85,.21,len*.75,.12,.32,'#909c8d',24);for(let x=len*.13;x<len*.87;x+=.5)b.box(x,5.27,.31,.04,.73,.05,'#626e60',24);b.box(len/2,5.63,.31,len*.75,.06,.06,'#626e60',24);b.box(len/2,9.06,.60,len+1.6,.22,1.4,'#d1d4c4',24);
+}else{const n=Math.max(1,Math.round(len/3.6)),cuts=Array.from({length:n+1},(_,k)=>len*k/n),split=len*(14-la[0])/(lc[0]-la[0]);if(split>0&&split<len)cuts.push(split);cuts.sort((a,b)=>a-b);for(let k=0;k<cuts.length-1;k++){const s=cuts[k],e=cuts[k+1],u=la[0]+(lc[0]-la[0])*(s+e)/(2*len),h=u<14?H.low:H.main,levels=h===H.low?1:2;for(let fl=0;fl<levels;fl++){const base=fl*4.5,top=Math.min(base+4.5,h),x=(s+e)/2,w=(e-s)*.55;panel(s,x-w/2,base,top);panel(x+w/2,e,base,top);panel(x-w/2,x+w/2,base,base+1.1);panel(x-w/2,x+w/2,base+2.9,top);win(x-w/2,x+w/2,base+1.1,base+2.9);}}}
+}));}
+const rise=new G.Geometry();rise.quad(VERT(14,4.4,.0),VERT(14,4.4,32.27),VERT(14,9,32.27),VERT(14,9,0));add('035-high-low-riser',rise,'#aeb6a8',24,id);
+return{strategy:'building035-v46',floors:2,eastUpperWindowGroups:6,sourceOutline:true,westLowerVolume:true,heightMeasured:false,entranceLeafCountVerified:false};}
+A.render=function(b,f,add){return f.properties.id===ID?render(b,f,add):previous(b,f,add);};Y.Building035={id:ID,render,world,local,pieces,heights:H};
+})(YY);

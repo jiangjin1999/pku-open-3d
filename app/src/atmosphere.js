@@ -1,0 +1,3 @@
+/* Only sunny elevated views get cartographic clarity. Weather stays physical in
+ * the model's artistic sense; this is not a visibility or air-quality forecast. */
+(function(Y){'use strict';Y.Atmosphere={fog(s,c){if(s.isolate)return 0;if(s.weather===2)return .002;if(s.weather===1)return .00078;const base=.00021;if(s.weather!==0||s.mapClarity===false||!c?.eye||!c?.target)return base;const dx=c.eye[0]-c.target[0],dy=c.eye[1]-c.target[1],dz=c.eye[2]-c.target[2],dist=Math.hypot(dx,dy,dz);if(!Number.isFinite(dist)||dist<1)return base;const high=Math.max(0,Math.min(1,(dy/dist-.40)/.28)),far=Math.max(0,Math.min(1,(dist-280)/440));return base-(base-.000085)*high*far;}};})(YY);

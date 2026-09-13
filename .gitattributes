@@ -1,0 +1,9 @@
+# Preserve original bytes; source hashes are part of the scene/performance contract.
+* -text
+*.md diff
+*.py diff
+*.js diff
+*.cjs diff
+*.json diff
+*.css diff
+*.html diff
