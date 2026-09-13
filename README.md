@@ -38,12 +38,18 @@ PKU-3D is an interactive model of Peking University's Yanyuan campus, with indiv
 
 ## Controls
 
-| Action | Input |
+| Input | Action |
 | --- | --- |
-| Orbit | Drag |
-| Pan | Right-drag |
-| Zoom | Scroll |
-| Inspect a building | Click a building or search by name |
+| Left-button drag | Orbit in 3D; pan in plan view |
+| Right-button drag, or `Shift` + left-button drag | Pan |
+| Mouse wheel | Scroll up to zoom in, down to zoom out |
+| Left click on a building or place label | Show building details |
+| Arrow keys | Pan |
+| `+` / `−` | Zoom in / out |
+| `/` | Open building search |
+| `Esc` | Close a dialog or building details |
+
+On touchscreens, drag with one finger and pinch with two fingers to zoom. Use the **⌂** button to return to the campus overview. The **操作说明** button at the bottom right opens the controls guide.
 
 A desktop browser with WebGL 2 support is recommended. The interface currently uses Chinese.
 
