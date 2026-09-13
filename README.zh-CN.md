@@ -6,16 +6,16 @@
 
 由 **GPT-6 Astra** 构建，全部基础数据与建模参考均来自公开来源。
 
-**[在线演示](https://sldyns.github.io/PKU-3D/)** · [English](README.md) · [版本发布](https://github.com/sldyns/PKU-3D/releases) · [贡献指南](CONTRIBUTING.zh-CN.md)
+**[在线演示](https://sldyns.github.io/yanyuan/)** · [English](README.md) · [版本发布](https://github.com/sldyns/PKU-3D/releases) · [贡献指南](CONTRIBUTING.zh-CN.md)
 
 [![Version](https://img.shields.io/badge/version-1.0.0-8b302c)](https://github.com/sldyns/PKU-3D/releases/tag/v1.0.0)
-[![WebGL 2](https://img.shields.io/badge/rendering-WebGL%202-2f6555)](https://sldyns.github.io/PKU-3D/)
+[![WebGL 2](https://img.shields.io/badge/rendering-WebGL%202-2f6555)](https://sldyns.github.io/yanyuan/)
 
 </div>
 
 本项目为非官方校园可视化作品。
 
-[![未名湖与博雅塔周边的校园全景](docs/media/campus.jpg)](https://sldyns.github.io/PKU-3D/)
+[![未名湖与博雅塔周边的校园全景](docs/media/campus.jpg)](https://sldyns.github.io/yanyuan/)
 
 PKU-3D 是北京大学燕园校区的交互式三维模型，包含楼宇、院落、道路与水系。项目在浏览器中运行，支持建筑搜索、地图对照、光照和天气调节，以及沿校园道路行走的行人。
 
