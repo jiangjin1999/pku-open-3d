@@ -39,7 +39,9 @@ npm run dev
 
 ## 发布
 
-同步更新 `VERSION`、包版本和页面版本。按需重建场景后，运行 `npm run assets:pack`，将资源包上传到对应 GitHub Release，再部署网页。Pages 工作流会恢复锁定的资源、构建 `dist/` 并发布。
+同步更新 `VERSION`、包版本和页面版本。按需重建场景后，运行 `npm run assets:pack`，将资源包上传到对应 GitHub Release。
+
+运行 `npm run deploy` 构建网页并推送到 `gh-pages`，GitHub Pages 会从该分支发布到 `https://sldyns.github.io/PKU-3D/`。`main` 保存可编辑源码，`gh-pages` 只保存生成的网站。发布需要该仓库的 Git 推送权限。
 
 ## 本地外观参考
 

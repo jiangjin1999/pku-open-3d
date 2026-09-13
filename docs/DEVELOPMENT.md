@@ -39,7 +39,9 @@ For interface and documentation changes, use `npm run build`. After changing bui
 
 ## Release
 
-Keep `VERSION`, package metadata and displayed version information in sync. Build the scene when needed, then run `npm run assets:pack`. Attach the resulting archive to the matching GitHub release before deploying. The Pages workflow restores these pinned assets, builds `dist/` and publishes it.
+Keep `VERSION`, package metadata and displayed version information in sync. Build the scene when needed, then run `npm run assets:pack` and attach the archive to the matching GitHub release.
+
+Run `npm run deploy` to build and push the generated website to `gh-pages`. GitHub Pages publishes that branch at `https://sldyns.github.io/PKU-3D/`. The `main` branch contains the editable source; `gh-pages` contains only the generated website. Publishing requires Git push access to this repository.
 
 ## Local reference material
 

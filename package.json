@@ -10,7 +10,8 @@
     "build": "python3 app/build.py --cached",
     "build:scene": "python3 app/build.py",
     "assets:pack": "python3 scripts/assets.py pack",
-    "test": "node --test app/tests/adjacent-draw46.test.cjs app/tests/instance-transfer46.test.cjs app/tests/provoking-vertex46.test.cjs app/tests/scene-unshuffle46.test.cjs app/tests/uniform-cache46.test.cjs app/tests/visibility-direct-stream46.test.cjs app/tests/visibility-scratch46.test.cjs app/tests/visibility-groups46.test.cjs"
+    "test": "node --test app/tests/adjacent-draw46.test.cjs app/tests/instance-transfer46.test.cjs app/tests/provoking-vertex46.test.cjs app/tests/scene-unshuffle46.test.cjs app/tests/uniform-cache46.test.cjs app/tests/visibility-direct-stream46.test.cjs app/tests/visibility-scratch46.test.cjs app/tests/visibility-groups46.test.cjs",
+    "deploy": "python3 scripts/publish.py"
   },
   "devDependencies": {
     "playwright": "1.62.1"
