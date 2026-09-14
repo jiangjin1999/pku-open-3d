@@ -19,6 +19,8 @@ An unofficial campus visualization.
 
 PKU-3D is an interactive model of Peking University's Yanyuan campus, with individual buildings, courtyards, roads and lakes. It runs in the browser and includes building search, map overlays, changing light and weather, and pedestrians following campus paths.
 
+**[Watch the campus film](https://github.com/sldyns/PKU-3D/raw/refs/heads/main/docs/media/pku-3d-film.mp4)** · 34 seconds · 1920 × 800 · 60 fps
+
 <table>
 <tr>
 <td width="50%"><img src="docs/media/west-gate.jpg" alt="West Gate"><br><b>West Gate</b></td>
