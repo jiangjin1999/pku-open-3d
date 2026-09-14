@@ -15,11 +15,11 @@
 
 本项目为非官方校园可视化作品。
 
+https://github.com/user-attachments/assets/67393710-bc94-461c-9472-c6d6b0e4581e
+
 [![未名湖与博雅塔周边的校园全景](docs/media/campus.jpg)](https://sldyns.github.io/PKU-3D/)
 
 PKU-3D 是北京大学燕园校区的交互式三维模型，包含楼宇、院落、道路与水系。项目在浏览器中运行，支持建筑搜索、地图对照、光照和天气调节，以及沿校园道路行走的行人。
-
-**[观看燕园宣传片](https://github.com/sldyns/PKU-3D/raw/refs/heads/main/docs/media/pku-3d-film.mp4)** · 34 秒 · 1920 × 800 · 60 fps
 
 <table>
 <tr>

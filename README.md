@@ -15,11 +15,11 @@ Built with **GPT-6 Astra**. All source data and modeling references are publicly
 
 An unofficial campus visualization.
 
+https://github.com/user-attachments/assets/67393710-bc94-461c-9472-c6d6b0e4581e
+
 [![PKU campus overlooking Weiming Lake and Boya Pagoda](docs/media/campus.jpg)](https://sldyns.github.io/PKU-3D/)
 
 PKU-3D is an interactive model of Peking University's Yanyuan campus, with individual buildings, courtyards, roads and lakes. It runs in the browser and includes building search, map overlays, changing light and weather, and pedestrians following campus paths.
-
-**[Watch the campus film](https://github.com/sldyns/PKU-3D/raw/refs/heads/main/docs/media/pku-3d-film.mp4)** · 34 seconds · 1920 × 800 · 60 fps
 
 <table>
 <tr>
