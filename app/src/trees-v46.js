@@ -15,15 +15,24 @@ function geometry(type,variant){
  }
  const lean=[(R()-.5)*.045,0,(R()-.5)*.045],trunk=[[0,0,0],[lean[0]*.2,.22,lean[2]*.2],[lean[0]*.7,.43,lean[2]*.7],[lean[0],.66,lean[2]],[lean[0]*1.2,.91,lean[2]*1.2]];
  for(let i=0;i<4;i++)stem(trunk[i],trunk[i+1],[.027,.020,.014,.007][i],[.020,.014,.007,.0025][i],10);
+ // A short root collar and joined buttresses ground the trunk without widening
+ // the planting footprint. A separate seed leaves the established crown intact.
+ const roots=M.rng(460917+variant*179+type.length*131);
+ stem([0,0,0],M.lerp(trunk[0],trunk[1],.32),.034,.025,10);
+ for(let j=0;j<5;j++){const a=j*Math.PI*2/5+variant*.49,reach=.048+roots()*.016;
+  stem([0,.038,0],[Math.cos(a)*reach,.008,Math.sin(a)*reach],.014,.0035,8);
+ }
+ const trunkAt=y=>{let k=0;while(k<trunk.length-2&&y>trunk[k+1][1])k++;return M.lerp(trunk[k],trunk[k+1],(y-trunk[k][1])/(trunk[k+1][1]-trunk[k][1]));};
  const limbCount=cypress?11:pine?9:7;
  for(let j=0;j<limbCount;j++){
   const ang=j*2.399+variant*.49+(R()-.5)*.43,level=cypress?.19+j*.058:pine?.33+j*.058:.43+j*.047;
   const radial=crownWidth*(cypress?(1-(level-.15)*.83):pine?(1-(level-.30)*.62):(.75+R()*.22));
-  const start=[lean[0]*level,level,lean[2]*level],elbow=[Math.cos(ang)*radial*.56,level+(pine?.025:.10),Math.sin(ang)*radial*.56];
+  const start=trunkAt(level),elbow=[Math.cos(ang)*radial*.56,level+(pine?.025:.10),Math.sin(ang)*radial*.56];
   const end=[Math.cos(ang)*radial,level+(willow?.10:pine?.03:.18+R()*.045),Math.sin(ang)*radial];
-  stem(start,elbow,.0095*(1-j/(limbCount*1.5)),.0058);stem(elbow,end,.0058,.0024);
+  const branchBase=.0115*(1-j/(limbCount*1.5)),branchElbow=branchBase*.60;
+  stem(start,elbow,branchBase,branchElbow);stem(elbow,end,branchElbow,branchElbow*.40);
   const tips=[];
-  for(const sign of[-1,1]){const a=ang+sign*(.38+R()*.25),tip=[end[0]*.83+Math.cos(a)*radial*.29,end[1]+(willow?-.08:pine?.025:.055),end[2]*.83+Math.sin(a)*radial*.29];stem(M.lerp(elbow,end,.64),tip,.0028,.0009);tips.push(tip);}
+  for(const sign of[-1,1]){const a=ang+sign*(.38+R()*.25),tip=[end[0]*.83+Math.cos(a)*radial*.29,end[1]+(willow?-.08:pine?.025:.055),end[2]*.83+Math.sin(a)*radial*.29];stem(M.lerp(elbow,end,.64),tip,branchElbow*.48,.0009);tips.push(tip);}
   if(willow){const droop=[end[0]*1.03,end[1]-.24,end[2]*1.03];stem(end,droop,.0024,.0007);tips.push(M.lerp(end,droop,.6));}
   lobes.push({center:M.lerp(elbow,end,.72),rx:radial*.39,ry:willow?.17:pine?.064:cypress?.093:.13,rz:radial*.39,tips});
  }
@@ -35,8 +44,18 @@ function geometry(type,variant){
   const n=M.norm([R()-.5,.1+R()*.62,R()-.5]),side=M.norm(M.cross(n,Math.abs(n[1])>.95?[1,0,0]:[0,1,0])),up=M.cross(n,side),size=(pine||cypress?.019:.026)+R()*(pine||cypress?.014:.018),g=i%3===0?shade:light;
   const pt=(x,y)=>M.add(center,M.add(M.mul(side,x*size),M.mul(up,y*size*(willow?1.3:1))));g.quad(pt(-1,-1),pt(1,-1),pt(1,1),pt(-1,1),n);
  }
+ // Small overlapping sprays bridge the outer lobes; retain the original cards
+ // and silhouette, with species-specific inner shapes rather than opaque blobs.
+ const innerCount=pine?72:cypress?96:willow?100:120;
+ for(let i=0;i<innerCount;i++){
+  const l=lobes[i%lobes.length],a=R()*Math.PI*2,u=R()*2-1,r=Math.sqrt(R()),q=Math.sqrt(1-u*u),axis=trunkAt(l.center[1]),c=M.lerp(axis,l.center,.58+R()*.18);
+  const center=[c[0]+Math.cos(a)*q*l.rx*r*.55,c[1]+u*l.ry*r*.72,c[2]+Math.sin(a)*q*l.rz*r*.55];
+  const n=M.norm([R()-.5,.1+R()*.62,R()-.5]),side=M.norm(M.cross(n,Math.abs(n[1])>.95?[1,0,0]:[0,1,0])),up=M.cross(n,side),size=(pine||cypress?.018:.024)+R()*.012;
+  const aspect=willow?1.65:pine?.48:cypress?.72:upright?1.16:1,g=i%3===0?light:shade;
+  const pt=(x,y)=>M.add(center,M.add(M.mul(side,x*size),M.mul(up,y*size*aspect)));g.quad(pt(-1,-1),pt(1,-1),pt(1,1),pt(-1,1),n);
+ }
  let radius=0;for(const g of[wood,light,shade])for(let i=0;i<g.v.length;i+=8)radius=Math.max(radius,Math.hypot(g.v[i],g.v[i+2]));
- return{wood,light,shade,radius,leafCards:count};
+ return{wood,light,shade,radius,leafCards:count+innerCount};
 }
 function tree(x,z,h=12,type='broad',id,metadata={}){
  type=palette[type]?type:'broad';const old=[this.origin,this.rotation,this.id,this.anim],R=M.rng(seedOf(id)),variant=id%6,key='tree46-'+type+'-'+variant;

@@ -120,7 +120,16 @@ function render(b,f){
     for(const x of[h.x-h.w/2,h.x-h.w/6,h.x+h.w/6,h.x+h.w/2])b.box(x,cy,.015,.07,hh+.07,.11,C.red,6);
     for(const y of[h.lo,h.door?2.81:h.lo+.63,h.hi])b.box(h.x,y,.018,h.w+.06,.065,.12,C.red,6);
     if(h.door){for(const side of[-1,1])b.box(h.x+side*h.w*.38,.92,.045,h.w*.22,.85,.14,C.red,6);}
-    else b.box(h.x,h.lo-.07,.11,h.w+.22,.13,.35,C.brick,30);
+    else {
+     // Archived heritage photographs show concrete lintels and brick reveals.
+     // Detail only photographed court faces / identified gable faces; back
+     // elevations retain their explicitly approximate existing construction.
+     if(entry||end&&s.ends[name==='end0'?0:1]){
+      for(const side of[-1,1])b.box(h.x+side*(h.w/2-.055),cy,-.09,.11,hh,.22,C.brick,30);
+      b.box(h.x,h.hi+.10,.055,h.w+.32,.20,.29,C.belt,24);
+     }
+     b.box(h.x,h.lo-.07,.11,h.w+.22,.13,.35,C.brick,30);
+    }
    }});
    if(end){
     // Direct19 west /20 ends /21 west originals: one central upper column.
@@ -141,6 +150,20 @@ function render(b,f){
     for(let k=0;k<=18;k++)for(let j=0;j<8;j++){const u=-2.22+k*4.44/18;b.beam(cp(u,j/8),cp(u,(j+1)/8),.035,C.tile,2);}
     for(let j=0;j<4;j++)b.box(x,.075+j*.12,2.91-j*.31,4.30,.15,.66,C.stone,24);
     b.box(x,.38,1.35,4.30,.22,2.6,C.stone,24);
+    // No.20's photographed porch has solid sloping stone stair cheeks.
+    // Keep all doorway positions and the shared straight galleries fixed.
+    if(s.number===20){
+     const cheek=new G.Geometry();
+     for(const side of[-1,1]){
+      const x0=x+side*2.15,x1=x+side*2.53,z0=1.94,z1=3.25;
+      const a=[x0,.49,z0],c=[x1,.49,z0],d=[x1,.08,z1],e=[x0,.08,z1];
+      const quad=(...points)=>cheek.quad(...(side>0?points.reverse():points));
+      quad(a,c,d,e);quad(e,d,[x1,0,z1],[x0,0,z1]);
+      quad(a,e,[x0,0,z1],[x0,0,z0]);
+      quad(d,c,[x1,0,z0],[x1,0,z1]);
+     }
+     b.mesh('porch-stone-cheeks',cheek,0,0,0,1,1,1,C.stone,24);
+    }
     // Small circular number plate is photographed. Geometry avoids adding
     // three new text-atlas slots and changing unrelated objects' texture UVs.
     const disk=new G.Geometry();for(let j=0;j<32;j++){const t=j*Math.PI/16,u=(j+1)*Math.PI/16;disk.tri([x,6.99,.13],[x+Math.cos(t)*.28,6.99+Math.sin(t)*.28,.13],[x+Math.cos(u)*.28,6.99+Math.sin(u)*.28,.13]);}b.mesh('number-disc',disk,0,0,0,1,1,1,'#d5d8cc',24);

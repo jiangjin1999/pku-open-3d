@@ -13,7 +13,7 @@ if '--cached' not in sys.argv:
 if '--cached' in sys.argv:
     index = (R / 'index.html').read_text()
     scripts = [p for p in re.findall(r'<script src="([^"]+)"></script>', index)
-               if not re.search(r'(?:assets|reference-gallery|engine|app-v29|materials|scene-cache46|scene-package46)\.js$', p)]
+               if not re.search(r'(?:assets|reference-gallery|engine|app-v29|materials|material-detail|pedestrians-v46|scene-cache46|scene-package46)\.js$', p)]
     digest = hashlib.sha256()
     for file in scripts + ['tools/scene-collector46.js', 'tools/bake-scene46.cjs']:
         digest.update(file.encode()); digest.update((R / file).read_bytes())

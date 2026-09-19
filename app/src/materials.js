@@ -1,1 +1,1 @@
-YY.MATERIAL_ATLAS="assets/materials-display.jpg";YY.TEXTURE_FALLBACK46="assets/runtime-v46/scene/textures-9ad8e419394ea1d431659a10.js";
+YY.MATERIAL_ATLAS="assets/materials-display.jpg";YY.TEXTURE_FALLBACK46="assets/runtime-v46/scene/textures-288771c8165f4224de7f2141.js";

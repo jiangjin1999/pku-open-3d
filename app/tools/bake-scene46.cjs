@@ -4,7 +4,7 @@ const root=path.resolve(__dirname,'..'),out=path.join(root,'assets/runtime-v46/s
 function playwright(){try{return require('playwright');}catch{}return require(path.join(require('os').homedir(),'.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright'));}
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 const index=fs.readFileSync(path.join(root,'index.html'),'utf8');
-const scripts=[...index.matchAll(/<script src="([^"]+)"><\/script>/g)].map(m=>m[1]).filter(p=>!/(?:assets|reference-gallery|engine|app-v29|materials|scene-cache46|scene-package46)\.js$/.test(p));
+const scripts=[...index.matchAll(/<script src="([^"]+)"><\/script>/g)].map(m=>m[1]).filter(p=>!/(?:assets|reference-gallery|engine|app-v29|materials|material-detail|pedestrians-v46|scene-cache46|scene-package46)\.js$/.test(p));
 const atlasSourceHash=hash(Buffer.from(JSON.stringify(scripts.filter(p=>!p.endsWith('/visibility.js')).map(file=>[file,hash(fs.readFileSync(path.join(root,file)))]))));
 const digest=crypto.createHash('sha256');for(const file of [...scripts,'tools/scene-collector46.js','tools/bake-scene46.cjs']){digest.update(file);digest.update(fs.readFileSync(path.join(root,file)));}
 const baselineConfig=path.join(root,'data/scene-atlas-baseline46.json');if(fs.existsSync(baselineConfig)){const value=fs.readFileSync(baselineConfig);digest.update(value);digest.update(fs.readFileSync(path.join(root,JSON.parse(value).path)));}

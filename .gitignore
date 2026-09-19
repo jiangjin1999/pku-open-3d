@@ -71,3 +71,6 @@ node_modules/
 !/app/tests/visibility-direct-stream46.test.cjs
 !/app/tests/visibility-scratch46.test.cjs
 /app/tests/fixtures/building117-unbatched.js
+
+!/app/tests/reflection-plane46.test.cjs
+!/app/tests/material-routing46.test.cjs

@@ -18,7 +18,7 @@ test('native flat-shading convention is configured before programs on every new 
 test('an unsupported extension retains the WebGL default and all surface programs',()=>{
  const {calls,shaders}=renderer(false);
  assert.equal(calls.filter(c=>c[0]==='mode').length,0);
- assert.equal(shaders.length,12);
+ assert.equal(shaders.length,14);
  assert.ok(calls.some(c=>c[1]==='WEBGL_provoking_vertex'));
 });
 test('all flat outputs are constant per instance, so first and last vertices have identical values',()=>{

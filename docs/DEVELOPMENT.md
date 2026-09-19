@@ -37,6 +37,14 @@ For interface and documentation changes, use `npm run build`. After changing bui
 
 `npm test` checks decoding, instance transfer, visibility and draw reuse. Visual review and performance comparisons remain separate checks. See [Performance](development/performance.md).
 
+## Rendering
+
+Surface lighting, reflected color, fog, glass and particles share a linear HDR target when half-float color rendering supports the existing MSAA sample count. The final composite applies contact shading and tone mapping once. Other devices retain the 8-bit target and antialiasing; reflection sampling reverses the display map before mixing light.
+
+Water surfaces are horizontal meshes. Their transformed bounds supply the reflection plane; the selected or nearest visible surface determines the single planar reflection target. Simultaneously visible water at different heights still shares that target. Tree rendering specializes the same material equations without removing leaves or changing their order.
+
+`material-detail.js` and the pedestrian runtime do not contribute static scene geometry and are excluded from the scene-input digest. Building, vegetation and landscape edits still require a scene rebuild.
+
 ## Release
 
 Keep `VERSION`, package metadata and displayed version information in sync. Build the scene when needed, then run `npm run assets:pack` and attach the archive to the matching GitHub release.

@@ -51,7 +51,19 @@ function render(b,f,add){const id=f.properties.pickId;b.id=id;const vertex=(u,y,
  // Vertical ends of the stepped north roofs close only the height difference.
  for(const [u,a,c] of [[7.5,parts[0],parts[1]],[24,parts[1],parts[2]]]){const mesh=new G.Geometry();for(let j=0;j<32;j++){const v0=6.72*j/32,v1=6.72*(j+1)/32;mesh.quad(vertex(u,Math.min(profile(a,u,v0),profile(c,u,v0)),v0),vertex(u,Math.min(profile(a,u,v1),profile(c,u,v1)),v1),vertex(u,Math.max(profile(a,u,v1),profile(c,u,v1)),v1),vertex(u,Math.max(profile(a,u,v0),profile(c,u,v0)),v0));}add('050-north-roof-step-'+u,mesh,C.wall,30,id);}
  // Southern approach and carved basin: dimensions fitted to photos; exact hall correspondence remains open.
- group('bamboo-entry-provisional',()=>{const x=15.2,z=6.38;b.box(x,.24,z+.44,3.1,.48,1.08,C.stone,24);for(let k=0;k<3;k++){const h=.16*(3-k);b.box(x,h/2,z+1.14+k*.33,3.1,h,.34,C.stone,24);}b.box(x,.05,z+3.8,1.45,.10,.93,C.stone,24);b.box(x,.28,z+3.8,.92,.38,.58,C.stone,24);b.box(x,.53,z+3.8,1.17,.12,.73,C.stone,24);for(const dz of[-.41,.41])b.box(x,.81,z+3.8+dz,1.65,.48,.12,C.stone,24);for(const dx of[-.82,.82])b.box(x+dx,.81,z+3.8,.12,.48,.84,C.stone,24);b.box(x,.60,z+3.8,1.5,.08,.70,'#717766',24);
+ group('bamboo-entry-provisional',()=>{const x=15.2,z=6.38;b.box(x,.24,z+.44,3.1,.48,1.08,C.stone,24);for(let k=0;k<3;k++){const h=.16*(3-k);b.box(x,h/2,z+1.14+k*.33,3.1,h,.34,C.stone,24);}b.box(x,.05,z+3.8,1.45,.10,.93,C.stone,24);
+ // OIR entrance photo and the 2023 ceremony photo show a flared pedestal,
+ // rounded/chamfered bowl corners and a rolled lip, rather than a box trough.
+ // Preserve the fitted location/size; do not invent the unresolved carvings.
+ const basin=new G.Geometry(),outline=[[-1,-.66],[-.76,-1],[.76,-1],[1,-.66],[1,.66],[.76,1],[-.76,1],[-1,.66]];
+ const courses=[[.10,.55,.35],[.17,.57,.37],[.22,.48,.31],[.40,.35,.25],[.51,.43,.29],[.57,.61,.36],[.62,.72,.38],[.93,.83,.44],[1.02,.85,.46],[1.06,.83,.44],[1.06,.72,.34],[.69,.62,.27]];
+ for(let j=1;j<courses.length;j++)for(let i=0;i<outline.length;i++){
+  const a=outline[i],c=outline[(i+1)%outline.length],lo=courses[j-1],hi=courses[j];
+  const pt=(q,r)=>[x+q[0]*r[1],r[0],z+3.8+q[1]*r[2]];
+  basin.quad(pt(a,lo),pt(a,hi),pt(c,hi),pt(c,lo));
+ }
+ b.mesh('entry-basin-profile',basin,0,0,0,1,1,1,C.stone,24);
+ b.box(x,.685,z+3.8,1.23,.025,.53,'#717766',24);
  const leaves=new G.Geometry();
  for(const side of[-1,1])for(let i=0;i<15;i++){const xx=x+side*(2.1+(i%3)*.49),zz=z+.8+Math.floor(i/3)*.82,h=3.65+(i%4)*.21,leanX=Math.sin(i*2.3)*.20,leanZ=Math.cos(i*1.7)*.19;const stem=t=>[xx+leanX*t,h*t,zz+leanZ*t];b.beam([xx,0,zz],stem(1),.022,'#6e8151',24);
  for(let j=0;j<5;j++){const frac=.48+j*.105,root=stem(frac),ang=.6+i*2.1+j*1.5,tip=[root[0]+Math.cos(ang)*.70,root[1]+.12,root[2]+Math.sin(ang)*.70];b.beam(root,tip,.011,'#607349',24);for(let k=1;k<=7;k++)for(const sideLeaf of[-1,1]){const t=k/8,c=[root[0]+(tip[0]-root[0])*t,root[1]+.14,root[2]+(tip[2]-root[2])*t],a=ang+sideLeaf*.78,len=.21+(k%3)*.035,w=.033,ux=Math.cos(a),uz=Math.sin(a),px=-uz,pz=ux,pts=[[c[0],c[1],c[2]],[c[0]+ux*len*.5+px*w,c[1]+.035,c[2]+uz*len*.5+pz*w],[c[0]+ux*len,c[1]-.04,c[2]+uz*len],[c[0]+ux*len*.5-px*w,c[1]+.03,c[2]+uz*len*.5-pz*w]];leaves.quad(...pts.map(q=>vertex(...q)));}}}

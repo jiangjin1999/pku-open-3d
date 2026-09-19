@@ -19,6 +19,18 @@ function warp(geo){const out=new G.Geometry();
  for(let i=0;i<geo.v.length;i+=24)tri(...[0,8,16].map(k=>geo.v.slice(i+k,i+k+3)));return out;
 }
 function withElevation(b,f,fn){const p=f.properties,dy=elevation(...p.centre),original=b.e.add;if(!dy)return fn();b.e.add=function(k,g,m,c,a,uv){const mm=new Float32Array(m);mm[13]+=dy;return original.call(this,k,g,mm,c,a,uv)};try{return fn()}finally{b.e.add=original}}
+// A small fitted arris catches light on the existing dressed-stone treads.
+// It refines their surface only: the map, slab extents and walking levels stay fixed.
+function stoneSlab(b,x,y,z,w,h,d,color){
+ const bevel=Math.min(.014,h*.22),key='landscape42-stone-slab-'+[w,h,d].join('-');
+ const geo=b.geo(key,()=>{
+  const g=new G.Geometry(),ring=[[-.5,.5],[.5,.5],[.5,-.5],[-.5,-.5]],shoulder=.5-bevel/h;
+  const lower=ring.map(([u,v])=>[u,-.5,v]),edge=ring.map(([u,v])=>[u,shoulder,v]),top=ring.map(([u,v])=>[u-Math.sign(u)*bevel/w,.5,v-Math.sign(v)*bevel/d]);
+  for(let i=0;i<4;i++){const j=(i+1)%4;g.quad(lower[i],lower[j],edge[j],edge[i]);g.quad(edge[i],edge[j],top[j],top[i]);}
+  g.quad(...top);g.quad(...lower.slice().reverse());return g;
+ });
+ b.mesh(key,geo,x,y,z,w,h,d,color,10);
+}
 function ground(b,add){const id=Y.CAMPUS.features.find(f=>f.properties.id==='precinct/531').properties.pickId;
  add('island42-water-under-bridge',F.surface(channel,.5),'#689a91',4,Y.CAMPUS.features.find(f=>f.properties.id==='way/838526031').properties.pickId);
  add('island42-shore-wall',F.walls(island,.24,.81),'#9d9e89',10,id);
@@ -28,7 +40,7 @@ function ground(b,add){const id=Y.CAMPUS.features.find(f=>f.properties.id==='pre
  // Irregular exposed stone, confined to the pavilion mound. No invented rock wall.
  b.id=pavilionId;for(const [cx,cz]of[[-306,-333],[-300,-339],[-286,-325]])for(let j=0;j<5;j++){const a=j*2.399,x=cx+Math.cos(a)*(j*.38),z=cz+Math.sin(a)*(j*.37),y=elevation(x,z);b.sphere(x,y+.12,z,.65+(j%3)*.35,.4+(j%4)*.17,.55+(j%2)*.4,j%2?'#969c87':'#abb09a',10,0,false);}
  // Short ascent from the adjacent eastern path to the pavilion platform.
- for(let j=0;j<14;j++){const x=hill[0]+6.3+j*.55,y=elevation(x,hill[1])+.12;b.box(x,y-.10,hill[1],.60,.22,2.05,'#b7baa7',10);}
+ for(let j=0;j<14;j++){const x=hill[0]+6.3+j*.55,y=elevation(x,hill[1])+.12;stoneSlab(b,x,y-.10,hill[1],.60,.22,2.05,'#b7baa7');}
 
 }
 function conifer(b,t){const old=[b.id,b.anim];b.id=t.id;b.local(t.point[0],elevation(...t.point),t.point[1],0,()=>{const h=t.height;b.cyl(0,0,0,.25+h*.012,h*.88,'#746e59',10,.45,6);for(let row=0;row<9;row++){const y=h*(.20+row*.081),r=h*.20*(1-row/10);for(let j=0;j<6;j++){const a=j*Math.PI/3+row*.77;b.beam([0,y-.6,0],[Math.cos(a)*r*.9,y+.08,Math.sin(a)*r*.9],.065,'#726b53',6);}}
@@ -38,11 +50,11 @@ function conifer(b,t){const old=[b.id,b.anim];b.id=t.id;b.local(t.point[0],eleva
 const officeTrees=[{point:[-338,-137],height:11},{point:[-338.3,-154.5],height:13},{point:[-357,-118],height:18},{point:[-358,-175],height:17}].map((t,i)=>({...t,id:805420+i,type:'conifer',zone:'office-photo42',source:'北大新闻网2024办公楼前合影，四株主要常绿树可辨；单株落点与树种近似'}));
 function bridge(b,f){if(f.properties.id!=='heritage/lake-flat-bridge')return false;b.id=f.properties.pickId;
  b.local(-80.775,0,-194.399,0,()=>{const w=2.8,d=7.15,deck=1.32;
-  b.box(0,deck-.10,0,w,.20,d,'#adb5ad',10);for(let z=-d/2+.37;z<d/2;z+=.72)b.box(0,deck-.012,z,w-.025,.045,.704,'#b8beb4',10);
+  b.box(0,deck-.10,0,w,.20,d,'#adb5ad',10);for(let z=-d/2+.37;z<d/2;z+=.72)stoneSlab(b,0,deck-.012,z,w-.025,.045,.704,'#b8beb4');
   // Six stone supports leave five short openings. The surviving bridge has no balustrades.
   for(let j=0;j<=5;j++){const z=-d/2+j*d/5;b.box(0,.63,z,w-.38,.79,.35,'#98a69e',10);b.box(0,1.06,z,w+.10,.20,.56,'#a8b2a7',10);}
-  for(let j=0;j<7;j++)b.box(0,.12+(j+.5)*.166,-7.0+(j+.5)*.50,w,.166,.53,'#b5bcb0',10);
-  for(let j=0;j<3;j++)b.box(0,1.19-j*.145,d/2+.23+j*.47,w,.16,.49,'#b5bcb0',10);
+  for(let j=0;j<7;j++)stoneSlab(b,0,.12+(j+.5)*.166,-7.0+(j+.5)*.50,w,.166,.53,'#b5bcb0');
+  for(let j=0;j<3;j++)stoneSlab(b,0,1.19-j*.145,d/2+.23+j*.47,w,.16,.49,'#b5bcb0');
  });return true;}
 
 Y.Landscape42={elevation,walkElevation,warp,withElevation,ground,conifer,officeTrees,bridge,island,sourceIsland,channel,hill};

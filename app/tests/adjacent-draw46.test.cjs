@@ -15,3 +15,8 @@ test('ranges, gaps, different meshes, geometry lengths and transparent boundary 
 test('visibility rebuilds use newly changed instance counts, not old merged records',()=>{
  const items=[item(a,0,1),item(a,28,2)];assert.equal(e.groupDraws(items,2).drawItems[0].record.count,3);items[1].record.count=1;assert.equal(e.groupDraws(items,2).drawItems[0].record.count,2);assert.equal(items[0].record.count,1);
 });
+test('identical meshes cannot merge across the specialized leaf shader boundary',()=>{
+ const items=[item(a,0,1),item(a,28,1),item(a,56,1),item(a,84,1)];
+ [true,true,false,true].forEach((leaf,i)=>items[i].b.foliageIsotropic=leaf);
+ const g=e.groupDraws(items,4);assert.equal(g.drawItems.length,3);assert.equal(g.drawItems[0].record.count,2);assert.deepEqual(expand(g.drawItems),expand(items));
+});

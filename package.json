@@ -1,6 +1,6 @@
 {
   "name": "pku-3d",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Interactive 3D model of Peking University, built with GPT-6 Astra using publicly available data",
   "scripts": {
@@ -10,7 +10,7 @@
     "build": "python3 app/build.py --cached",
     "build:scene": "python3 app/build.py",
     "assets:pack": "python3 scripts/assets.py pack",
-    "test": "node --test app/tests/adjacent-draw46.test.cjs app/tests/instance-transfer46.test.cjs app/tests/provoking-vertex46.test.cjs app/tests/scene-unshuffle46.test.cjs app/tests/uniform-cache46.test.cjs app/tests/visibility-direct-stream46.test.cjs app/tests/visibility-scratch46.test.cjs app/tests/visibility-groups46.test.cjs",
+    "test": "node --test app/tests/adjacent-draw46.test.cjs app/tests/instance-transfer46.test.cjs app/tests/provoking-vertex46.test.cjs app/tests/scene-unshuffle46.test.cjs app/tests/uniform-cache46.test.cjs app/tests/visibility-direct-stream46.test.cjs app/tests/visibility-scratch46.test.cjs app/tests/visibility-groups46.test.cjs app/tests/reflection-plane46.test.cjs app/tests/material-routing46.test.cjs",
     "deploy": "python3 scripts/publish.py"
   },
   "devDependencies": {

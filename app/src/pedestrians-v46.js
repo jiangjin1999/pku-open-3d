@@ -32,8 +32,9 @@ const SHADOW_VERT=`#version 300 es
 precision highp float;layout(location=0)in vec3 aPosition;layout(location=3)in mat4 iMatrix;uniform mat4 uVP;uniform vec3 uSun;uniform float uGround;out vec2 vXZ;
 void main(){vec3 w=(iMatrix*vec4(aPosition,1.)).xyz;float h=max(0.,w.y-uGround);vXZ=w.xz-uSun.xz*h/max(.23,uSun.y);gl_Position=uVP*vec4(vXZ.x,uGround+.007,vXZ.y,1.);}`;
 const SHADOW_FRAG=`#version 300 es
-precision highp float;in vec2 vXZ;uniform vec3 uClip0;uniform vec3 uClip1;uniform vec3 uClip2;uniform vec3 uClip3;uniform float uOpacity;uniform vec3 uPlaneDepth;uniform vec2 uResolution;out vec4 outColor;
-void main(){vec3 q=vec3(vXZ,1.);if(min(min(dot(q,uClip0),dot(q,uClip1)),min(dot(q,uClip2),dot(q,uClip3)))<.015)discard;vec2 ndc=gl_FragCoord.xy/uResolution*2.-1.;gl_FragDepth=dot(uPlaneDepth,vec3(ndc,1.))*.5+.5;outColor=vec4(.035,.045,.039,uOpacity);}`;
+precision highp float;in vec2 vXZ;uniform vec3 uClip0;uniform vec3 uClip1;uniform vec3 uClip2;uniform vec3 uClip3;uniform float uOpacity;uniform float uHDR;uniform vec3 uPlaneDepth;uniform vec2 uResolution;out vec4 outColor;
+vec3 shadowColor(){vec3 c=vec3(.035,.045,.039);if(uHDR<.5)return c;vec3 y=pow(c,vec3(2.2)),a=2.51-2.43*y,b=.03-.59*y;return (-b+sqrt(b*b+.56*y*a))/(2.*a*1.10);}
+void main(){vec3 q=vec3(vXZ,1.);if(min(min(dot(q,uClip0),dot(q,uClip1)),min(dot(q,uClip2),dot(q,uClip3)))<.015)discard;vec2 ndc=gl_FragCoord.xy/uResolution*2.-1.;gl_FragDepth=dot(uPlaneDepth,vec3(ndc,1.))*.5+.5;outColor=vec4(shadowColor(),uOpacity);}`;
 // All projected triangles share one analytic screen-space depth plane. Using
 // interpolated triangle depths here causes repeated blending from rounding noise.
 function planeDepth(vp,y,x,z){const q=[[x,y,z,1],[x+10,y,z,1],[x,y,z+10,1]].map(p=>{const a=M.apply(vp,p);return[a[0]/a[3],a[1]/a[3],a[2]/a[3]]}),a=q[0],b=q[1],c=q[2],bx=b[0]-a[0],by=b[1]-a[1],cx=c[0]-a[0],cy=c[1]-a[1],det=bx*cy-cx*by;if(!Number.isFinite(det)||Math.abs(det)<1e-16)return null;const A=((b[2]-a[2])*cy-(c[2]-a[2])*by)/det,B=(bx*(c[2]-a[2])-cx*(b[2]-a[2]))/det;return[A,B,a[2]-A*a[0]-B*a[1]];}
@@ -108,7 +109,7 @@ class Walkers{
   // Directional silhouette projected onto the proven flat road only. Equal-depth
   // LESS writes form one union, so overlapping body triangles do not darken it.
   // No moving object is baked into the cached campus shadow map.
-  if(pass===0&&e.day>.01){const p=this.shadow;g.useProgram(p.p);e.uniform(p,'uVP',vp);e.uniform(p,'uSun',e.sun);e.uniform(p,'uResolution',[e.canvas.width,e.canvas.height]);e.uniform(p,'uOpacity',.23*e.day*(this.state.weather===1||this.state.weather===2?.40:1));g.enable(g.BLEND);g.blendFunc(g.SRC_ALPHA,g.ONE_MINUS_SRC_ALPHA);g.depthFunc(g.LESS);g.depthMask(true);
+  if(pass===0&&e.day>.01){const p=this.shadow;g.useProgram(p.p);e.uniform(p,'uVP',vp);e.uniform(p,'uSun',e.sun);e.uniform(p,'uResolution',[e.canvas.width,e.canvas.height]);e.uniform(p,'uHDR',e.hdr?1:0);e.uniform(p,'uOpacity',.23*e.day*(this.state.weather===1||this.state.weather===2?.40:1));g.enable(g.BLEND);g.blendFunc(g.SRC_ALPHA,g.ONE_MINUS_SRC_ALPHA);g.depthFunc(g.LESS);g.depthMask(true);
    // Every chosen road has exactly the same .12 m flat surface. Clip each shadow
    // against its source ribbon by route; consecutive route ranges draw only their own instances,
    // and the three proven corridors are disjoint by tens of metres.

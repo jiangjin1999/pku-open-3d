@@ -8,8 +8,8 @@
     },
     {
       "path": "app/assets/runtime-v46/scene/bucket-hashes.json",
-      "bytes": 1605780,
-      "sha256": "85922fc0cfb662cbfa42f71064f9339307d821d2d1b26296892800145e660256"
+      "bytes": 1607030,
+      "sha256": "7bd84133c6fa9e4c07921b1bcc037411ddcb8fc5d0ad36fef715d8668150894a"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-0091c00202dc5096d0eaf04f.bin.gz",
@@ -22,6 +22,16 @@
       "sha256": "01971b211adad3d646da83a812ec33cef0756b521b3ec3db86a343c59b06781d"
     },
     {
+      "path": "app/assets/runtime-v46/scene/chunk-046a5097471f19a6783c62f3.bin.gz",
+      "bytes": 1023288,
+      "sha256": "046a5097471f19a6783c62f359de2f731b5564dea90821f69567651147cc947c"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-046a5097471f19a6783c62f3.js",
+      "bytes": 1364439,
+      "sha256": "e730f066ef2ab54f91c1dc198991ac07bb7893faff8ef0d37bb04e42d3f50223"
+    },
+    {
       "path": "app/assets/runtime-v46/scene/chunk-0b5386eeb26f15fb618db3be.bin.gz",
       "bytes": 1380726,
       "sha256": "0b5386eeb26f15fb618db3be5c9276549affd6da381b78ac2d856dd60cd7b5de"
@@ -30,6 +40,16 @@
       "path": "app/assets/runtime-v46/scene/chunk-0b5386eeb26f15fb618db3be.js",
       "bytes": 1841023,
       "sha256": "e287063c3cc6153fb169aaa224ad653643a114de8c2cea811b717aaf3d64d2f7"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-0ded4c0f5d1d102cfabafb11.bin.gz",
+      "bytes": 2727589,
+      "sha256": "0ded4c0f5d1d102cfabafb11c96ff55ae486b2ef4dfce5604f418c7c244c7df4"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-0ded4c0f5d1d102cfabafb11.js",
+      "bytes": 3636843,
+      "sha256": "2814afb0d23a474edcc260ef630970432298db50fda44cbdae77378a7c10fb55"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-0e0f869c5a69d2509ee3ca6c.bin.gz",
@@ -112,6 +132,16 @@
       "sha256": "6bec39f40ce1a9c5cde3a1b290ae23cb87582cf7243331f070da2be067479db1"
     },
     {
+      "path": "app/assets/runtime-v46/scene/chunk-1d19885423de89ddf1381151.bin.gz",
+      "bytes": 812733,
+      "sha256": "1d19885423de89ddf1381151d801c663d158bb4c3ba4b2eb9e25f31e0475ad1b"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-1d19885423de89ddf1381151.js",
+      "bytes": 1083699,
+      "sha256": "efb6ff50c5d91f7c645ebaa3b60f77ac9ecf44cb9827e337c523b5561ef50079"
+    },
+    {
       "path": "app/assets/runtime-v46/scene/chunk-200e7f5badeef0d717cbd631.bin.gz",
       "bytes": 1012890,
       "sha256": "200e7f5badeef0d717cbd63197399b5b02e5611ed741b61b60fdaac0bb044f42"
@@ -130,16 +160,6 @@
       "path": "app/assets/runtime-v46/scene/chunk-2310a9e5323e328c7d2c528c.js",
       "bytes": 1193307,
       "sha256": "36865872f23c7f8b449fcdf1f124a397cf3ae24780747d1df2826bbd11200103"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-25d60f9bc300e940923c3974.bin.gz",
-      "bytes": 1013956,
-      "sha256": "25d60f9bc300e940923c397431cd3512db7e959f6face9d2f08e7eed53c12772"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-25d60f9bc300e940923c3974.js",
-      "bytes": 1351999,
-      "sha256": "2877187eb69c92038752b449b5266f1dd2520aa437dc63d3a3b0ef11e8187eb4"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-25f79cb6dacabda1dfdd9c6e.bin.gz",
@@ -182,16 +202,6 @@
       "sha256": "1c48851825a8bbcdcb7cc0dd9bd1e875111d579a183417f0391407b6e7865640"
     },
     {
-      "path": "app/assets/runtime-v46/scene/chunk-3972b53963ce1e3cd6a2a901.bin.gz",
-      "bytes": 1417930,
-      "sha256": "3972b53963ce1e3cd6a2a9016b76b4ab1546d7cf8a51f9ff4ded7d15915ba70b"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-3972b53963ce1e3cd6a2a901.js",
-      "bytes": 1890631,
-      "sha256": "bf2cacd3085e61826397a89dbb1afe664da37e5c20a629a9af5f4d244e08b36b"
-    },
-    {
       "path": "app/assets/runtime-v46/scene/chunk-3a946397bfda4e78a229df17.bin.gz",
       "bytes": 1362995,
       "sha256": "3a946397bfda4e78a229df17cc8fb2b5b3aee28b49691360d6dc7acc9f5c8e26"
@@ -222,6 +232,16 @@
       "sha256": "39d6554797046dbbc387fc37e851ffad754d6bde58eebe52fb79d1195893f08c"
     },
     {
+      "path": "app/assets/runtime-v46/scene/chunk-3bc116d053e2ad02efb197ec.bin.gz",
+      "bytes": 1029030,
+      "sha256": "3bc116d053e2ad02efb197ec8a291985c18c2ecbafe1a1b63c13198f19ad6886"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-3bc116d053e2ad02efb197ec.js",
+      "bytes": 1372095,
+      "sha256": "f121248d99845512087758f21de8d72b3392414aa1353efd82c59f17f6a18e8a"
+    },
+    {
       "path": "app/assets/runtime-v46/scene/chunk-3d2d4cbcf6b2c8c26c33a57d.bin.gz",
       "bytes": 83713,
       "sha256": "3d2d4cbcf6b2c8c26c33a57d2c98e2605bf58e12d54b559800e846a06a5882f2"
@@ -230,6 +250,26 @@
       "path": "app/assets/runtime-v46/scene/chunk-3d2d4cbcf6b2c8c26c33a57d.js",
       "bytes": 111675,
       "sha256": "d353f5f0ee2a287a33ef283597c16e8e48b1fcacdb53a796c51c99418b2e3915"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-3e3160c49c93817bbc33342c.bin.gz",
+      "bytes": 666593,
+      "sha256": "3e3160c49c93817bbc33342c9968a3fd7a56fcacc1685beb025dbeb6dd9ba660"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-3e3160c49c93817bbc33342c.js",
+      "bytes": 888847,
+      "sha256": "783369c74e34d9094a22c3bceaab17ec3e7ac80c70a976a352a480dcb24a9f47"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-3fadfdc8a7f52775bea8e29e.bin.gz",
+      "bytes": 2111444,
+      "sha256": "3fadfdc8a7f52775bea8e29e9b89be41051603a8e0cce4a3435d51ef7ae2c010"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-3fadfdc8a7f52775bea8e29e.js",
+      "bytes": 2815315,
+      "sha256": "0b644e371a7bfc26b6575fc408acb8ab48867b3e33445e5d24122ff3bc60df76"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-40183e951b35f82a00b6a865.bin.gz",
@@ -282,6 +322,16 @@
       "sha256": "f6044cd33ef54197ee0ad47c2ab5a5607930364e0fb5e0f15c5dad0402ffd43c"
     },
     {
+      "path": "app/assets/runtime-v46/scene/chunk-4cca313ce40be8e9c58d0cf8.bin.gz",
+      "bytes": 1070924,
+      "sha256": "4cca313ce40be8e9c58d0cf83256c313f520fb15e0f9a284614f63f623cefc0a"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-4cca313ce40be8e9c58d0cf8.js",
+      "bytes": 1427955,
+      "sha256": "1f438e5d57b71fd71fba2f91863700e2361a8ba07032b5fe39b537c5fe461d0f"
+    },
+    {
       "path": "app/assets/runtime-v46/scene/chunk-4e54a22aeaecafc83e0b47c0.bin.gz",
       "bytes": 2028741,
       "sha256": "4e54a22aeaecafc83e0b47c06a6e4000abfa4405ebc73d40fd531e121b66e2f1"
@@ -312,14 +362,14 @@
       "sha256": "34077a6bd410d3282efdfe0ddae88976c73870cdb1487c4d02cd744ed3b82ee3"
     },
     {
-      "path": "app/assets/runtime-v46/scene/chunk-5ca5c0cd9c6b97d901e12b41.bin.gz",
-      "bytes": 807159,
-      "sha256": "5ca5c0cd9c6b97d901e12b416cc98b4d80772b403a19d9f8e60de0e361e1efd8"
+      "path": "app/assets/runtime-v46/scene/chunk-5c07706c589db5bf4b4d4b5d.bin.gz",
+      "bytes": 429081,
+      "sha256": "5c07706c589db5bf4b4d4b5d7b25d4bc58e796555cc483b08bfe8dfb3e924435"
     },
     {
-      "path": "app/assets/runtime-v46/scene/chunk-5ca5c0cd9c6b97d901e12b41.js",
-      "bytes": 1076267,
-      "sha256": "26c748504892a884bd1de86959b9b3788ad3635d402db9a8e993e395ab134498"
+      "path": "app/assets/runtime-v46/scene/chunk-5c07706c589db5bf4b4d4b5d.js",
+      "bytes": 572163,
+      "sha256": "028149c078116fab0a740c7851e357b74e3b5413755385d89908c37fb25835b2"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-5fd07ec448c9609d4035f1cf.bin.gz",
@@ -340,16 +390,6 @@
       "path": "app/assets/runtime-v46/scene/chunk-6fcb6168d246f6922afb7e6b.js",
       "bytes": 1697931,
       "sha256": "87c8878bf0ef430eb7fd43cb61aad82909684a031796fe0d24872f72b92f92f9"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-7ca68cab30268b332ba9452e.bin.gz",
-      "bytes": 963362,
-      "sha256": "7ca68cab30268b332ba9452e99ed8a1a3cc1542ad1f626b590ce6ab59dc868a9"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-7ca68cab30268b332ba9452e.js",
-      "bytes": 1284539,
-      "sha256": "8cb30c014fbfbf543abe1e8042c7ee4b78f66dab8eb7162a76813a419b0bb40c"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-8b646751aa88a580e22add05.bin.gz",
@@ -452,16 +492,6 @@
       "sha256": "bc81315063789416f872ac7d282a987af006f5a233a1f71054586d12fe2a1c4e"
     },
     {
-      "path": "app/assets/runtime-v46/scene/chunk-9ff2ae42d0974de4c66ffeb5.bin.gz",
-      "bytes": 2111125,
-      "sha256": "9ff2ae42d0974de4c66ffeb5c9ebdf5a537a981f393b0e6c5e594e6ff9343e4e"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-9ff2ae42d0974de4c66ffeb5.js",
-      "bytes": 2814891,
-      "sha256": "50bdaf54acae825663b144c7e9a0cf0fd46cbd5eb9d5ed65265d44a0527fc821"
-    },
-    {
       "path": "app/assets/runtime-v46/scene/chunk-a021684157c06822e19ff4da.bin.gz",
       "bytes": 926948,
       "sha256": "a021684157c06822e19ff4da155f74be233452745c591aa24841e7317ce3e24b"
@@ -470,36 +500,6 @@
       "path": "app/assets/runtime-v46/scene/chunk-a021684157c06822e19ff4da.js",
       "bytes": 1235987,
       "sha256": "b46d52fcdf1d8f54c29aca8baeee966e36e30f224491753bcfd0aebebea72e59"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-a060e8d8b6f64220a4727605.bin.gz",
-      "bytes": 1070523,
-      "sha256": "a060e8d8b6f64220a4727605828f7a861b6ea541e57885dbf22e105bc171b9db"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-a060e8d8b6f64220a4727605.js",
-      "bytes": 1427419,
-      "sha256": "eef15f669bfb95fd6ab2468c3067c07300740c0d24d14d26182724d12f866549"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-a7bae33f31373f4b97846b25.bin.gz",
-      "bytes": 1029180,
-      "sha256": "a7bae33f31373f4b97846b25d499c4275bfe4c7512defb2ae4f2b6762041d3d1"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-a7bae33f31373f4b97846b25.js",
-      "bytes": 1372295,
-      "sha256": "1aaf9b1151025efba9db4938d030580d72dd36e61a265dfddbca661a1ff4075c"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-a7c2b687156bbd2c7030798c.bin.gz",
-      "bytes": 428753,
-      "sha256": "a7c2b687156bbd2c7030798c95861154830f4f4d80c5222b4f4e0e02675fdb9a"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-a7c2b687156bbd2c7030798c.js",
-      "bytes": 571727,
-      "sha256": "686ffd65547992ec5b82404c58e71e066d9d9c5ef706f45592efe1a83a9c7c62"
     },
     {
       "path": "app/assets/runtime-v46/scene/chunk-a85143a717ae419d8efcfa0e.bin.gz",
@@ -562,16 +562,6 @@
       "sha256": "b331502e9c3f13912c0673be71d197fce5314f963dde738ab129c922511f5e9f"
     },
     {
-      "path": "app/assets/runtime-v46/scene/chunk-b531f0199b2713781089b759.bin.gz",
-      "bytes": 2416550,
-      "sha256": "b531f0199b2713781089b759be30586cff31aa4554d9967c5dff91ed69451adc"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-b531f0199b2713781089b759.js",
-      "bytes": 3222123,
-      "sha256": "4d249f2eb1f3235afff9a8d30364f905022fcb5fdf0ed6ddd28e7dfa310634a4"
-    },
-    {
       "path": "app/assets/runtime-v46/scene/chunk-b6eedd3ea74fd4a9cb0b72e9.bin.gz",
       "bytes": 810142,
       "sha256": "b6eedd3ea74fd4a9cb0b72e9830619f94a305ce4051302584bc14b4ceaf34bc7"
@@ -632,16 +622,6 @@
       "sha256": "ff7878d0a08f5ec5953fadabdb1a66e8a800d3ebfc3b686bb1f77f20fefd3390"
     },
     {
-      "path": "app/assets/runtime-v46/scene/chunk-cd4b07a1651ea96753031778.bin.gz",
-      "bytes": 662595,
-      "sha256": "cd4b07a1651ea967530317780734062b1145f637c5db88618711cd09c7622dc0"
-    },
-    {
-      "path": "app/assets/runtime-v46/scene/chunk-cd4b07a1651ea96753031778.js",
-      "bytes": 883515,
-      "sha256": "937fe368812b2cb41a01d8d026eb651641be74bd6374e1f4d756f93d04da4050"
-    },
-    {
       "path": "app/assets/runtime-v46/scene/chunk-ce0308e31c869fa17ed82073.bin.gz",
       "bytes": 2325746,
       "sha256": "ce0308e31c869fa17ed8207375cb126818c550a9ea95fd3a3b263bc7ae38dd4d"
@@ -682,19 +662,39 @@
       "sha256": "1c8ebc431c87e3e6901836e6a78465fa3033417df80cab4f6ed53766b7123b0c"
     },
     {
+      "path": "app/assets/runtime-v46/scene/chunk-f5ddb332a22d608a9ad869d0.bin.gz",
+      "bytes": 1417340,
+      "sha256": "f5ddb332a22d608a9ad869d0ed73aa046b91caade5c3150f4afc931d0b7a2802"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-f5ddb332a22d608a9ad869d0.js",
+      "bytes": 1889843,
+      "sha256": "9a0a35964a48efc8fa2a066c030e42825d9a707386008464a9b96ea44801754b"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-fbf17a618f8d3ee780a99cf0.bin.gz",
+      "bytes": 1014254,
+      "sha256": "fbf17a618f8d3ee780a99cf061007f9fe2a23a6d2cbf7e68d91ea23dd2140c18"
+    },
+    {
+      "path": "app/assets/runtime-v46/scene/chunk-fbf17a618f8d3ee780a99cf0.js",
+      "bytes": 1352395,
+      "sha256": "8399739bcad16c26d45b8e5f1b5998a1faa588634f4878c1126059f90f52f3d1"
+    },
+    {
       "path": "app/assets/runtime-v46/scene/manifest.json",
-      "bytes": 6474396,
-      "sha256": "fba6276837978086683b94672aa65c7c4ae68c156bea976aa292cf37a6fa7ac4"
+      "bytes": 6478062,
+      "sha256": "3c16d0ad30cbbd7d128bbd99c1b8e68b42cef5048b50139958f19da47dbe8e72"
     },
     {
-      "path": "app/assets/runtime-v46/scene/sign-atlas-d2f9933910223242a0adabd5.png",
-      "bytes": 915861,
-      "sha256": "d2f9933910223242a0adabd5490ba763695eb0c4ffd04869b82370984ef081fa"
+      "path": "app/assets/runtime-v46/scene/sign-atlas-e93cd72fd66f85788be1f5ab.png",
+      "bytes": 916251,
+      "sha256": "e93cd72fd66f85788be1f5ab26a589deb02838654e471b99c45ce4252ff5c384"
     },
     {
-      "path": "app/assets/runtime-v46/scene/textures-9ad8e419394ea1d431659a10.js",
-      "bytes": 2726553,
-      "sha256": "9ad8e419394ea1d431659a10c16321ebc0de776200e8cfae6306821be5a78b23"
+      "path": "app/assets/runtime-v46/scene/textures-288771c8165f4224de7f2141.js",
+      "bytes": 2727073,
+      "sha256": "288771c8165f4224de7f214143398d79e3087e34f80ccb80547379958f7e4f9a"
     },
     {
       "path": "app/assets/scene-atlas-baseline46.png",
@@ -703,8 +703,8 @@
     }
   ],
   "archive": {
-    "file": "pku-3d-assets-1.0.0.zip",
-    "bytes": 179973249,
-    "sha256": "db8cb375051a48314d415cea3510717ce06e755e200268a0fd0036b3af66cd4f"
+    "file": "pku-3d-assets-1.1.0.zip",
+    "bytes": 180868407,
+    "sha256": "167072532929ba4834422626da18b346fccd62a99d8d23ea1077611c497d46f6"
   }
 }
