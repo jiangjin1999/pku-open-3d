@@ -8,12 +8,14 @@ MAP_LINKS = {
     'standard': ('标准地图 ↗', 'https://www.openstreetmap.org/#map=17/39.992/116.304'),
 }
 
+subprocess.run([sys.executable, str(R / 'tools/build-water-detail.py')], check=True)
+
 if '--cached' not in sys.argv:
     subprocess.run(['node', str(R / 'tools/bake-scene46.cjs')], check=True)
 if '--cached' in sys.argv:
     index = (R / 'index.html').read_text()
     scripts = [p for p in re.findall(r'<script src="([^"]+)"></script>', index)
-               if not re.search(r'(?:assets|reference-gallery|engine|app-v29|materials|material-detail|pedestrians-v46|scene-cache46|scene-package46)\.js$', p)]
+               if not re.search(r'(?:assets|reference-gallery|engine|app-v29|materials|material-detail|water-detail|pedestrians-v46|scene-cache46|scene-package46)\.js$', p)]
     digest = hashlib.sha256()
     for file in scripts + ['tools/scene-collector46.js', 'tools/bake-scene46.cjs']:
         digest.update(file.encode()); digest.update((R / file).read_bytes())

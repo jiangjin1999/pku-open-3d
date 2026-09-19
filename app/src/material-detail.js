@@ -62,4 +62,14 @@ void campusMaterialDetail(float mat,vec2 st,float dist,inout vec3 base,inout vec
   n=normalize(mix(n,detail,1.-smoothstep(45.,55.,dist)));
  }
 }
+// Rain response distinguishes porous surfaces, foliage, glass and metal.
+// Exposure uses surface orientation only; it does not imply surveyed shelter.
+void campusRainResponse(float mat,float upward,inout vec3 base,inout float rough){
+ if(mat==4.)return;
+ if(mat==3.||mat==16.||mat==45.||mat==46.){base*=.94;rough*=.80;return;}
+ if(mat==5.||mat==28.||mat==44.){rough*=.90;return;}
+ if(mat==9.||mat==29.||mat==32.||mat==37.||mat==43.){base*=.96;rough*=.82;return;}
+ float exposure=.15+.85*smoothstep(-.35,.75,upward);
+ base*=mix(1.,.82,exposure);rough*=mix(1.,.54,exposure);
+}
 `;

@@ -26,3 +26,16 @@ test('rejected ranges can discard an appended candidate without advancing the st
  V.select(b,planes,[0,0,300],1000,state,stream,true,true);assert.equal(stream.used,28);assert.deepEqual(bytes(stream.data.subarray(0,28)),prefix);
  const small=bucket(c,1);V.compile(small);const r=V.select(small,planes,[0,0,300],1000,{...state,detailLOD:false},stream,true,true);assert.equal(r.count,1);assert.deepEqual(bytes(stream.data.subarray(28,56)),bytes(small.data));
 });
+for(const fallback of [false,true])test('long accepted spans survive stream growth and rejected runs; fallback='+fallback,()=>{
+ const c=runtime(fallback),V=c.YY.Visibility,b=bucket(c,8193);b.detailWidth=0;
+ const accepted=[];for(let k=0;k<b.count;k++){
+  b.data[k*28+21]=188;b.spatial[k*5]=k>=2048&&k<4096?1000:0;b.spatial[k*5+1]=b.spatial[k*5+2]=0;
+  if(k<2048||k>=4096)accepted.push(...b.data.subarray(k*28,(k+1)*28));
+ }
+ V.compile(b);c.b=b;
+ const stream=vm.runInContext('({data:new Float32Array(56),used:28})',c);stream.data.fill(-17,0,28);
+ const result=V.select(b,planes,[0,0,100],1000,{...state,detailLOD:false},stream,true,true);
+ assert.equal(result.count,6145);assert.equal(stream.used,28);
+ assert.deepEqual(Array.from(stream.data.subarray(0,28)),Array(28).fill(-17));
+ assert.deepEqual(Array.from(stream.data.subarray(28,28+result.count*28)),accepted);
+});

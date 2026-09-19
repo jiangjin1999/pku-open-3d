@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.2.0
+
+- Directional sky and ground ambient light for clearer sheltered surfaces; rain and mist attenuate direct sunlight consistently.
+- Material-specific rain response for masonry, timber, foliage, glass and metal.
+- Calmer bank transitions derived from the mapped outer outline of Weiming Lake, without changing water geometry or inferring depth.
+- View-space contact shading and skipped irrelevant backlit shadow lookups retain sample counts, reflection resolution and MSAA.
+- Conservatively classified visibility groups and consecutive record copies avoid redundant per-instance work, preserving selection, byte order and compact upload streams.
+- Parallel texture/scene loading, shared shader-stage compilation and overlapped visibility preparation shorten serial startup work while keeping two-worker decoding and bounded uploads.
+
 ## 1.1.0
 
 - Linear HDR compositing with a single final tone map on supported hardware, preserving the existing MSAA sample count and an 8-bit fallback.

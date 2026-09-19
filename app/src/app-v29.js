@@ -74,15 +74,22 @@ function tick(now){
  }
 }
 
+async function loadRenderResources(next,onProgress){
+ // Independent texture and mesh resources can load together. Wait for both
+ // even on failure, so disposal cannot race a remaining resource upload.
+ const results=await Promise.allSettled([next.loadMaterials(),Promise.resolve().then(()=>Y.SceneCache46&&Y.SCENE_PACKAGE46?Y.SceneCache46.load(next,onProgress):Y.createMetricCampus(next))]);
+ for(const result of results)if(result.status==='rejected')throw result.reason;
+ return results[1].value;
+}
 async function init(recover=false){
  if(!recover){renderCatalog();routeOptions();credit();let catalogChoice=null;try{catalogChoice=localStorage.getItem('yanyuan.catalog.collapsed');}catch{}root.classList.toggle('catalog-hidden',catalogChoice===null?innerWidth<=650:catalogChoice==='1');syncDisclosure();fitRegion('campus');}
  const generation=++renderGeneration;let next;
  try{
-  next=new Y.Engine(canvas);engine=next;next.resize(innerWidth,innerHeight);await next.loadMaterials();
-  const scene=Y.SceneCache46&&Y.SCENE_PACKAGE46?await Y.SceneCache46.load(next,(n,total)=>{if(generation===renderGeneration)$('status').textContent=(recover?'正在恢复校园… ':'正在打开校园… ')+Math.round(n/total*100)+'%';}):Y.createMetricCampus(next);
+  next=new Y.Engine(canvas);engine=next;next.resize(innerWidth,innerHeight);
+  const scene=await loadRenderResources(next,(n,total)=>{if(generation===renderGeneration)$('status').textContent=(recover?'正在恢复校园… ':'正在打开校园… ')+Math.round(n/total*100)+'%';});
   if(generation!==renderGeneration){next.dispose();return;}
   campus=scene;next.people=Y.Pedestrians46.create(next,campus,state);$('show-people').disabled=false;$('walkers-view').disabled=false;ready=true;lastVisualKey='';last=lastDraw=0;root.dataset.ready='true';$('coverage').textContent=`${D.features.filter(f=>f.properties.kind==='building'&&!f.properties.supersededBy43).length} 个建筑对象`;$('status').textContent='';
-  window.Yanyuan={version:'1.1.0',data:D,engine,campus,state,orbit,planView,get mode(){return mode},select,changeMode,fitRegion};
+  window.Yanyuan={version:'1.2.0',data:D,engine,campus,state,orbit,planView,get mode(){return mode},select,changeMode,fitRegion};
   if(!recover&&developmentReferences){const script=document.createElement('script');script.src='private/reference-gallery.js';script.onload=()=>{if(selected)renderReferenceGallery(by.get(selected).properties);};document.head.appendChild(script);}
    cancelAnimationFrame(frameRequest);frameRequest=requestAnimationFrame(tick);
  }catch(e){next?.dispose();if(generation!==renderGeneration)return;console.error(e);$('status').textContent='三维暂不可用，已切换平面地图。';changeMode('plan');ready=true;root.dataset.ready='plan-only';}

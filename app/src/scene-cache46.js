@@ -67,15 +67,17 @@
      const result=(async()=>{const encoded=location.protocol==='file:'?await localChunk(base,index,chunk):undefined;return decode(worker,index,chunk,encoded);})();
      result.catch(()=>{});return{index,result};
     };
-    let next=requestNext();
+    // Carry the same upload budget across chunk boundaries. A small chunk
+    // need not add an idle frame immediately after an in-chunk UI yield.
+    let next=requestNext(),checkpoint=performance.now();
     while(next){
      const {index,result}=next,buffer=await result;next=requestNext();
-     const content=chunks[index];let checkpoint=performance.now();
+     const content=chunks[index];
      if(engine.disposed)throw Error('Scene loading was interrupted');
      for(const{mesh,index:mi}of content.meshes){engine.preparedVertices(mi,new Float32Array(buffer,mesh.buffer.offset,mesh.buffer.length));if(performance.now()-checkpoint>7){await yieldUI();checkpoint=performance.now();}}
-     for(const{mesh,index:mi}of content.indices){const Type=mesh.indexType==='uint16'?Uint16Array:Uint32Array;engine.preparedIndices(mi,new Type(buffer,mesh.indices.offset,mesh.vertexCount));}
+     for(const{mesh,index:mi}of content.indices){const Type=mesh.indexType==='uint16'?Uint16Array:Uint32Array;engine.preparedIndices(mi,new Type(buffer,mesh.indices.offset,mesh.vertexCount));if(performance.now()-checkpoint>7){await yieldUI();checkpoint=performance.now();}}
      for(const bucket of content.buckets){engine.preparedInstances(bucket,new Float32Array(buffer,bucket.data.offset,bucket.data.length),new Float32Array(buffer,bucket.spatial.offset,bucket.spatial.length));if(performance.now()-checkpoint>7){await yieldUI();checkpoint=performance.now();}}
-     onProgress(++completed,m.chunks.length);await yieldUI();
+     onProgress(++completed,m.chunks.length);if(performance.now()-checkpoint>7){await yieldUI();checkpoint=performance.now();}
     }
    }));
    await atlasReady;if(engine.disposed)throw Error('Scene loading was interrupted');engine.setAtlas(atlas);await engine.finishPrepared(yieldUI);

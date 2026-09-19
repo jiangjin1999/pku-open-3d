@@ -23,3 +23,38 @@ test('grouped filtering preserves all selected matrices and cull counts across m
 test('tangent spheres, tiny buckets and positive or negative exploded parts remain visible',()=>{
  for(const n of [1,63,64,65,128,129,256]){const b=bucket(n,k=>[k%2?11:-11,0,0]);for(let k=0;k<n;k++)b.data[k*28+23]=k%2?2:-2;for(const explode of[-8,0,8])compare(b,planes,{...state,selected:188,explode,detailLOD:false});}
 });
+test('fully accepted groups copy exact records without rereading every instance sphere',()=>{
+ const b=bucket(513,k=>[(k%7-3)*.1,0,0]);current.compile(b);let reads=0;
+ b.spatial=new Proxy(b.spatial,{get(t,k){if(/^\d+$/.test(String(k)))reads++;return Reflect.get(t,k,t);}});
+ const result=current.select(b,planes,[0,0,100],1000,state);
+ assert.equal(result.count,513);assert.equal(result.culled,0);assert.ok(reads<10,`unexpected individual sphere reads: ${reads}`);
+ assert.deepEqual(Array.from(b.visible.subarray(0,513*28)),Array.from(b.data));
+});
+test('group acceptance remains conservative near projected detail limits and route filtering',()=>{
+ for(const distance of [1,259.9999,260,260.0001,400,625,625.0001,1200])for(const detailWidth of [0,.02,.34,1]){
+  const b=bucket(257,k=>[(k%7-3)*.1,0,0]);b.detailWidth=detailWidth;
+  for(let k=0;k<b.count;k++){b.data[k*28+20]=k%4===0?38:24;b.spatial[k*5+4]=k%5===0?.2:1;}
+  for(const mode of [{},{detailLOD:false},{selected:188,explode:1},{isolate:188}])compare(b,planes,{...state,...mode},[0,0,distance]);
+  for(let k=0;k<b.count;k+=64)b.data[k*28+21]=950999;
+  compare(b,planes,state,[0,0,distance]);
+ }
+});
+test('fully rejected detail groups retain cull accounting and selected-object exemptions',()=>{
+ const b=bucket(513,k=>[(k%7-3)*.1,0,0]);current.compile(b);let reads=0;
+ b.spatial=new Proxy(b.spatial,{get(t,k){if(/^\d+$/.test(String(k)))reads++;return Reflect.get(t,k,t);}});
+ const r=current.select(b,planes,[0,0,1200],1000,state);
+ assert.equal(r.count,0);assert.equal(r.culled,513);assert.ok(reads<10);
+ const selected=current.select(b,planes,[0,0,1200],1000,{...state,selected:188});
+ assert.equal(selected.count,513);assert.equal(selected.culled,0);
+ assert.deepEqual(Array.from(b.visible.subarray(0,513*28)),Array.from(b.data));
+ compare(bucket(513,k=>[(k%7-3)*.1,0,0]),planes,state,[0,0,1200]);
+});
+test('one-pass metadata preserves fixed bucket bounds, flags and insertion order',()=>{
+ for(const n of [0,1,63,64,65,127,128,129,513,4097]){
+  const b=bucket(n,k=>[(k%31-15)*1.7,(k%19-9)*.7,(k%11-5)*2.3]);b.detailWidth=.12;
+  for(let k=0;k<n;k++){b.data[k*28+20]=[4,38,24,7,3][k%5];b.data[k*28+21]=[800001,188,950012][k%3];b.data[k*28+23]=k%13-6;}
+  const a={...b},z={...b};current.compile(a);fixed.compile(z);
+  for(const key of ['coarse','ids','materials','surfaceWidths','essentialFlags'])assert.deepEqual(Array.from(a[key]),Array.from(z[key]),key+' n='+n);
+  for(const key of ['uniformMaterial','uniformId','maxPart'])assert.equal(a[key],z[key]);
+ }
+});

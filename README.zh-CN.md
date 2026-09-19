@@ -8,7 +8,7 @@
 
 **[在线演示](https://sldyns.github.io/PKU-3D/)** · [English](README.md) · [版本发布](https://github.com/sldyns/PKU-3D/releases) · [贡献指南](CONTRIBUTING.zh-CN.md)
 
-[![Version](https://img.shields.io/badge/version-1.1.0-8b302c)](https://github.com/sldyns/PKU-3D/releases/tag/v1.1.0)
+[![Version](https://img.shields.io/badge/version-1.2.0-8b302c)](https://github.com/sldyns/PKU-3D/releases/tag/v1.2.0)
 [![WebGL 2](https://img.shields.io/badge/rendering-WebGL%202-2f6555)](https://sldyns.github.io/PKU-3D/)
 
 </div>

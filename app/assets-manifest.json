@@ -684,17 +684,17 @@
     {
       "path": "app/assets/runtime-v46/scene/manifest.json",
       "bytes": 6478062,
-      "sha256": "3c16d0ad30cbbd7d128bbd99c1b8e68b42cef5048b50139958f19da47dbe8e72"
+      "sha256": "034fd8ef0a33231d2007991e5f1223ce490b707d6e6d93be288b9eaa50bc3008"
     },
     {
-      "path": "app/assets/runtime-v46/scene/sign-atlas-e93cd72fd66f85788be1f5ab.png",
-      "bytes": 916251,
-      "sha256": "e93cd72fd66f85788be1f5ab26a589deb02838654e471b99c45ce4252ff5c384"
+      "path": "app/assets/runtime-v46/scene/sign-atlas-7031b0819bdcdc88a6e76607.png",
+      "bytes": 916016,
+      "sha256": "7031b0819bdcdc88a6e766070f288818e0bee05f848b140813c5f487a55daf1d"
     },
     {
-      "path": "app/assets/runtime-v46/scene/textures-288771c8165f4224de7f2141.js",
-      "bytes": 2727073,
-      "sha256": "288771c8165f4224de7f214143398d79e3087e34f80ccb80547379958f7e4f9a"
+      "path": "app/assets/runtime-v46/scene/textures-5cd6db605e7d6420c3214345.js",
+      "bytes": 2726761,
+      "sha256": "5cd6db605e7d6420c321434547e90b6ea444da7c06c976c06976f38cca13e593"
     },
     {
       "path": "app/assets/scene-atlas-baseline46.png",
@@ -703,8 +703,8 @@
     }
   ],
   "archive": {
-    "file": "pku-3d-assets-1.1.0.zip",
-    "bytes": 180868407,
-    "sha256": "167072532929ba4834422626da18b346fccd62a99d8d23ea1077611c497d46f6"
+    "file": "pku-3d-assets-1.2.0.zip",
+    "bytes": 180867860,
+    "sha256": "ac66814377e859d679d0b9152865b233fb0e91e000907aefeb706a4ded9bd486"
   }
 }

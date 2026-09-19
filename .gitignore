@@ -74,3 +74,8 @@ node_modules/
 
 !/app/tests/reflection-plane46.test.cjs
 !/app/tests/material-routing46.test.cjs
+
+!/app/tools/build-water-detail.py
+!/app/tests/water-detail46.test.cjs
+!/app/tests/render-startup46.test.cjs
+!/app/tests/scene-upload-budget46.test.cjs
