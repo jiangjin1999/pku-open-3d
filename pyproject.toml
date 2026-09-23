@@ -1,0 +1,17 @@
+[project]
+name = "pku-open-3d"
+version = "0.1.0"
+description = "共建北大：照片、AI 与人类反馈协作的三维校园"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1", "uvicorn>=0.34,<1", "httpx>=0.28,<1",
+  "python-multipart>=0.0.20,<1", "pillow>=11,<13", "pillow-heif>=0.21,<2",
+  "pydantic>=2.10,<3", "pyjwt[crypto]>=2.10,<3",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8"]
+
+[tool.pytest.ini_options]
+testpaths = ["community/tests"]
+pythonpath = ["."]

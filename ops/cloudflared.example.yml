@@ -1,0 +1,8 @@
+# Copy outside the public checkout. Fill in values from cloudflared tunnel create.
+tunnel: YOUR_TUNNEL_UUID
+credentials-file: /absolute/private/path/YOUR_TUNNEL_UUID.json
+protocol: http2
+ingress:
+  - hostname: pku-open3d.org
+    service: http://127.0.0.1:18430
+  - service: http_status:404

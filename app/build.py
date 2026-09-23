@@ -1,8 +1,9 @@
 """Build the release website and its original-quality local assets."""
 from pathlib import Path
-import base64, hashlib, html, json, re, shutil, subprocess, sys
+import base64, hashlib, html, json, os, re, shutil, subprocess, sys
 
 R = Path(__file__).resolve().parent
+OUTPUT = Path(os.environ.get('PKU_BUILD_DIR', R.parent / 'dist'))
 MAP_LINKS = {
     'satellite': ('卫星地图 ↗', 'https://www.arcgis.com/apps/mapviewer/index.html?basemapUrl=https%3A%2F%2Fservices.arcgisonline.com%2FArcGIS%2Frest%2Fservices%2FWorld_Imagery%2FMapServer&center=116.304%2C39.992&level=17'),
     'standard': ('标准地图 ↗', 'https://www.openstreetmap.org/#map=17/39.992/116.304'),
@@ -34,7 +35,7 @@ texture_file = 'assets/runtime-v46/scene/textures-' + hashlib.sha256(texture_cod
 (R / texture_file).write_text(texture_code)
 (R / 'src/materials.js').write_text('YY.MATERIAL_ATLAS="assets/materials-display.jpg";YY.TEXTURE_FALLBACK46=' + json.dumps(texture_file) + ';')
 
-destination = R.parent / 'dist/assets'
+destination = OUTPUT / 'assets'
 if destination.parent.exists():
     shutil.rmtree(destination.parent)
 destination.mkdir(parents=True, exist_ok=True)
@@ -77,10 +78,10 @@ page = re.sub(r'<script src="([^"]+)"></script>', '', page)
 for mode, (label, href) in MAP_LINKS.items():
     page = re.sub(r'<button data-mode="' + mode + r'"[^>]*>.*?</button>', '<a href="' + html.escape(href, quote=True) + '" target="_blank" rel="noopener" title="在地图官网打开">' + label + '</a>', page)
 page = page.replace('<link rel="stylesheet" href="src/styles.css">', '<link rel="stylesheet" href="assets/' + style_name + '">')
-page = page.replace('</body>', '<script defer src="assets/' + bundle_name + '"></script></body>')
+page = page.replace('</body>', '<script defer src="assets/' + bundle_name + '"></script><script defer src="/static/campus-bridge.js"></script></body>')
 page = page.replace('src/assets/', 'assets/')
-(R.parent / 'dist/index.html').write_text(page)
-(R.parent / 'dist/.nojekyll').touch()
+(OUTPUT / 'index.html').write_text(page)
+(OUTPUT / '.nojekyll').touch()
 for notice in ('LICENSE', 'DATA_LICENSE.md'):
     shutil.copy2(R.parent / notice, destination.parent / notice)
 summary = {'version': (R.parent / 'VERSION').read_text().strip(), 'htmlBytes': len(page.encode()), 'scriptBytes': len(bundle.encode()), 'sceneCompressedBytes': manifest['packedStats']['compressedBytes'], 'sceneSourceHash': manifest['sourceHash'], 'images': len(gallery['images']), 'copiedAssets': len(paths), 'bundle': bundle_name}

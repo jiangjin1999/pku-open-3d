@@ -1,5 +1,14 @@
 # Changelog
 
+## 共建北大 0.1.0（社区服务首次部署）
+
+- 从原作 Fork，固定上游版本与资源，新增中文参与入口、匿名标注和反馈、凭证及任务私有资料。
+- 增加 GitHub 身份与 CLI 配对、局部声明式模型、渲染预览和仅模型数据的自动 PR 发布程序。
+- 增加版本冲突处理、人工核对记录、回退、L40s 用户服务、独立磁盘备份与恢复演练。
+- 固定域名、GitHub App 和校外真实验收待首次授权，见 docs/ACCEPTANCE.md。
+
+以下保留原作发布记录；VERSION 的 1.2.0 指上游校园底模。
+
 ## 1.2.0
 
 - Directional sky and ground ambient light for clearer sheltered surfaces; rain and mist attenuate direct sunlight consistently.

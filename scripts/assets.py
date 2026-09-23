@@ -128,11 +128,13 @@ def setup():
     cache = ROOT / '.cache'
     cache.mkdir(exist_ok=True)
     archive = cache / doc['archive']['file']
-    version = (ROOT / 'VERSION').read_text().strip()
-    url = 'https://github.com/sldyns/PKU-3D/releases/download/v' + version + '/' + archive.name
+    upstream = json.loads((ROOT / 'UPSTREAM.json').read_text())
+    version = upstream['release'].removeprefix('v')
+    repository = upstream['asset_repository']
+    url = 'https://github.com/' + repository + '/releases/download/v' + version + '/' + archive.name
     if not archive.exists() or sha(archive) != doc['archive']['sha256']:
         if shutil.which('gh') and (os.environ.get('GH_TOKEN') or os.environ.get('GITHUB_TOKEN')):
-            subprocess.run(['gh','release','download','v'+version,'--repo','sldyns/PKU-3D','--pattern',archive.name,'--dir',str(cache),'--clobber'],check=True)
+            subprocess.run(['gh','release','download','v'+version,'--repo',repository,'--pattern',archive.name,'--dir',str(cache),'--clobber'],check=True)
         else:
             with urlopen(url) as stream, archive.open('wb') as out:
                 shutil.copyfileobj(stream, out)

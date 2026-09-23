@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "part_id": "sample-fourth-floor",
+  "task_id": "task_00000000000000000000000000000000",
+  "place_id": "test-example-only",
+  "title": "测试样例：四楼局部空间，不代表真实校园",
+  "base_revision": null,
+  "space": "floor",
+  "floor": "四楼（测试）",
+  "origin": [
+    0,
+    12,
+    0
+  ],
+  "evidence": [
+    {
+      "observation_id": "obs_00000000000000000000000000000000",
+      "supports": "合成测试资料，不代表真实建筑",
+      "certainty": "estimated"
+    }
+  ],
+  "uncertainties": [
+    "所有位置、尺寸为测试值",
+    "没有构建其他楼层或整栋建筑"
+  ],
+  "nodes": [
+    {
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": 0,
+      "color": "#eee6db",
+      "parent_id": null,
+      "size": null,
+      "radius": null,
+      "height": null,
+      "segments": 16,
+      "vertices": [],
+      "indices": [],
+      "id": "group",
+      "type": "group"
+    },
+    {
+      "position": [
+        0,
+        0,
+        0
+      ],
+      "rotation": 0,
+      "color": "#b2ab9c",
+      "parent_id": "group",
+      "size": [
+        10,
+        0.2,
+        3
+      ],
+      "radius": null,
+      "height": null,
+      "segments": 16,
+      "vertices": [],
+      "indices": [],
+      "id": "floor",
+      "type": "box"
+    },
+    {
+      "position": [
+        0,
+        1.5,
+        -1.5
+      ],
+      "rotation": 0,
+      "color": "#efe9dc",
+      "parent_id": "group",
+      "size": [
+        10,
+        3,
+        0.2
+      ],
+      "radius": null,
+      "height": null,
+      "segments": 16,
+      "vertices": [],
+      "indices": [],
+      "id": "back",
+      "type": "box"
+    },
+    {
+      "position": [
+        -5,
+        1.5,
+        0
+      ],
+      "rotation": 0,
+      "color": "#b98271",
+      "parent_id": "group",
+      "size": [
+        0.2,
+        3,
+        3
+      ],
+      "radius": null,
+      "height": null,
+      "segments": 16,
+      "vertices": [],
+      "indices": [],
+      "id": "left",
+      "type": "box"
+    },
+    {
+      "position": [
+        4,
+        1.5,
+        1.4
+      ],
+      "rotation": 0,
+      "color": "#89796a",
+      "parent_id": null,
+      "size": null,
+      "radius": 0.15,
+      "height": 3,
+      "segments": 16,
+      "vertices": [],
+      "indices": [],
+      "id": "column",
+      "type": "cylinder"
+    }
+  ],
+  "replaces_baseline": false
+}

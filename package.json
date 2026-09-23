@@ -1,8 +1,8 @@
 {
-  "name": "pku-3d",
+  "name": "pku-open-3d",
   "version": "1.2.0",
   "private": true,
-  "description": "Interactive 3D model of Peking University, built with GPT-6 Astra using publicly available data",
+  "description": "共建北大：照片、自己的 AI 和人类反馈共同完善三维校园",
   "scripts": {
     "setup": "python3 scripts/assets.py setup",
     "dev": "python3 scripts/serve.py",
@@ -11,15 +11,19 @@
     "build:scene": "python3 app/build.py",
     "assets:pack": "python3 scripts/assets.py pack",
     "test": "node --test app/tests/adjacent-draw46.test.cjs app/tests/instance-transfer46.test.cjs app/tests/provoking-vertex46.test.cjs app/tests/scene-unshuffle46.test.cjs app/tests/uniform-cache46.test.cjs app/tests/visibility-direct-stream46.test.cjs app/tests/visibility-scratch46.test.cjs app/tests/visibility-groups46.test.cjs app/tests/reflection-plane46.test.cjs app/tests/material-routing46.test.cjs app/tests/water-detail46.test.cjs app/tests/render-startup46.test.cjs app/tests/scene-upload-budget46.test.cjs",
-    "deploy": "python3 scripts/publish.py"
+    "deploy": "python3 scripts/publish.py",
+    "build:community": "node scripts/build-community.mjs"
   },
   "devDependencies": {
-    "playwright": "1.62.1"
+    "playwright": "1.62.1",
+    "esbuild": "^0.25.0",
+    "three": "^0.180.0",
+    "exifr": "^7.1.3"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sldyns/PKU-3D.git"
+    "url": "https://github.com/jiangjin1999/pku-open-3d.git"
   },
-  "homepage": "https://sldyns.github.io/PKU-3D/"
+  "homepage": "https://pku-open3d.org/"
 }

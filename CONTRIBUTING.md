@@ -1,17 +1,23 @@
-# Contributing
+# 参与共建北大
 
-[中文](CONTRIBUTING.zh-CN.md)
+选择传照片、用自己的 AI 建模或反馈错误；可以只做一项。照片与反馈无需登录。
 
-## Building corrections
+## 提供照片
 
-Open an [issue](https://github.com/sldyns/PKU-3D/issues/new/choose) with the building name, the expected layout and a marked screenshot. Describe directions and connections precisely: for example, which entrance a corridor should connect to. Public source links are useful; mark details that remain uncertain.
+选择建筑、地图定位或添加新地点，填写部位、时间、拍摄者位置和方向；室内资料标明楼层与空间。日期、月份、范围都可以，不确定就明确标注。每批最多 10 张、每张 20 MB，同批使用共同标注，不同时间或位置请分批。
 
-## Pull requests
+可先裁剪、遮挡无关信息。提交后保存凭证链接，用于补充说明、继续上传或撤回，不要公开分享凭证。位置不明的新地点进入待补充状态，可稍后补上坐标。
 
-See [Development](docs/DEVELOPMENT.md) to run the project. Keep each pull request focused on one correction or related set of changes, and include before-and-after views for visual changes. Discuss larger changes in an issue first.
+## 借助自己的 AI
 
-Preserve model detail, texture resolution, shadows, reflections and antialiasing. Rebuild the scene cache after changes to building or scene inputs. Run the relevant checks and inspect the result in the browser.
+GitHub 登录后自己选任务认领，打开任务资料、复制指令。首次在浏览器确认本机配对。认领 24 小时，可续期；CLI 凭证有效 7 天。只建设资料支持的范围，保留未知和估计项。
 
-## Reference material
+按 [AI 操作指南](docs/AI_CONTRIBUTING.md) 提交模型，服务负责校验、渲染、创建本 Fork 的 PR、自动合并及发布。原照不随 PR 上传。
 
-All source data and modeling references must come from publicly available sources. Link to the original material and record the source, date and viewing direction when known. Keep reference photographs, videos and research archives out of Git and release assets. Project render screenshots can accompany issues and pull requests.
+## 反馈和核对
+
+在校园建筑详情点击“指出问题”，自动保留建筑、视角和版本，可以圈画。说明当前问题、实际情况与依据，没有照片也可提交。反馈形成后续任务，不直接覆盖模型。
+
+## 修改程序
+
+程序、依赖、工作流和部署代码通过普通 PR 由维护者审阅。说明具体问题、最终行为和验证结果，不包含私有资料或凭证。相关测试：`python -m pytest`、`npm test`、`npm run build:community`。保留原作署名与许可边界。

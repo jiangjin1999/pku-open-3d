@@ -1,0 +1,33 @@
+name: Community checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: |
+          python -m pip install uv==0.12.18
+          uv sync --frozen
+          npm ci
+      - name: Validate contribution service and renderer regressions
+        run: |
+          uv run python -m pytest -q
+          npm test
+          npm run build:community
+      - name: Check public model packages
+        run: |
+          uv run python -c "from pathlib import Path; from community.models import ModelPart; [ModelPart.model_validate_json(p.read_text()) for p in Path('models/parts').glob('*.json')]"

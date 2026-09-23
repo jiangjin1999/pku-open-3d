@@ -1,0 +1,13 @@
+[Unit]
+Description=PKU Open 3D fixed HTTPS tunnel
+After=network-online.target pku-open3d-web.service
+[Service]
+ExecStart=/absolute/runtime/bin/cloudflared tunnel --config /absolute/private/path/cloudflared.yml run
+Restart=on-failure
+RestartSec=10
+UMask=0077
+NoNewPrivileges=yes
+MemoryMax=512M
+CPUQuota=100%
+[Install]
+WantedBy=default.target

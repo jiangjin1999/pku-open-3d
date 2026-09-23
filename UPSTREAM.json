@@ -1,0 +1,15 @@
+{
+  "repository": "https://github.com/sldyns/PKU-3D",
+  "commit": "ccbdcadd39ed5e322df84d8896a14730c977eb8d",
+  "release": "v1.2.0",
+  "asset_repository": "sldyns/PKU-3D",
+  "asset_file": "pku-3d-assets-1.2.0.zip",
+  "asset_bytes": 180867860,
+  "asset_sha256": "ac66814377e859d679d0b9152865b233fb0e91e000907aefeb706a4ded9bd486",
+  "asset_manifest_sha256": "b03221908153e65ab4220665872d49cd8d475a7581d03a78c1d86b26ba4a43a9",
+  "community_repository": "jiangjin1999/pku-open-3d",
+  "licenses": [
+    "MIT",
+    "ODbL-1.0 for OSM-derived database"
+  ]
+}

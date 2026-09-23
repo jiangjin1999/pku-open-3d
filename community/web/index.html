@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#7b2639">
+  <meta name="description" content="贡献一张照片、使用自己的 AI，或指出一处问题。一起完善开放的北京大学三维校园。">
+  <link rel="icon" href="/static/favicon.svg" type="image/svg+xml"><title>共建北大 · PKU Open 3D</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <script type="module" src="/static/app.js"></script>
+</head>
+<body>
+  <header class="header"><a href="/" class="brand"><span class="brand-mark">共</span><span>共建北大<small>PKU OPEN 3D</small></span></a><nav aria-label="主导航"><a href="/tasks/">一起建设</a><a href="/guide/">参与指南</a><a href="https://github.com/jiangjin1999/pku-open-3d" target="_blank" rel="noopener">GitHub ↗</a><a class="nav-campus" href="/campus/">进入校园 <span>↗</span></a></nav></header>
+  <main id="app"><p class="loading">正在打开共建北大…</p></main>
+  <footer class="footer"><span>共建北大 <small>每一处细节，都有来处。</small></span><p>非官方开放协作项目 · 基于 <a href="https://github.com/sldyns/PKU-3D">sldyns / PKU-3D</a><br>代码与原创程序化资产 MIT · OSM 衍生地理数据库 ODbL</p><a href="/guide/#privacy">资料与使用说明 ↗</a></footer>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <dialog id="editor"><form method="dialog"><button class="dialog-close" aria-label="关闭">×</button></form><h2>只保留你想贡献的部分</h2><p class="muted">拖出矩形，再选择裁剪或遮挡。处理在你的浏览器内完成。</p><div class="editor-canvas"><canvas id="edit-canvas"></canvas><div id="edit-box"></div></div><div class="actions"><button id="crop-photo" class="button secondary">裁剪选区</button><button id="mask-photo" class="button secondary">遮挡选区</button><button id="save-photo" class="button">保存修改</button></div></dialog>
+</body>
+</html>
