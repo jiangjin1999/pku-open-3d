@@ -98,6 +98,7 @@ node_modules/
 community/web/app.js
 community/web/preview.js
 community/web/*.map
+community/web/*.LEGAL.txt
 community/web/campus.jpg
 community/web/campus-evening.jpg
 community/web/THIRD_PARTY.txt
