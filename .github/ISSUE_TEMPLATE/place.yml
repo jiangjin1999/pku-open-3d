@@ -2,6 +2,9 @@ name: 校园纠错
 description: 帮助校对建筑、入口、院落或道路
 title: "[校园纠错] "
 body:
+  - type: markdown
+    attributes:
+      value: "这里是公开 Issue。请只附模型截图和可公开说明，不要上传实景原照、私有资料包或提交凭证。照片请通过项目网站的匿名贡献入口提供，入口状态见 README。"
   - type: input
     id: place
     attributes:
@@ -20,4 +23,4 @@ body:
     id: source
     attributes:
       label: 可选的参考依据
-      description: 亲历描述或公开资料链接；请注明方向与时间。参考照片和视频不提交到源码仓库。
+      description: 可公开的亲历描述或合法公开资料链接；注明方向与时间。实景原照请使用网站私有贡献入口。
