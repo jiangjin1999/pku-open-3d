@@ -123,7 +123,7 @@ def open_pr(s, gh, submission):
         update(s, submission["id"], "pr_open", pr_number=pr["number"], pr_head=pr["head"]["sha"])
         return pr
     with connect(s) as db:
-        validate_submission(db, submission["task_id"], submission["owner"], ModelPart.model_validate_json(submission["document"]))
+        validate_submission(db, submission["task_id"], submission["owner"], ModelPart.model_validate_json(submission["document"]), accepted=True)
         files = publication_files(s, submission, db)
     base = gh.request("GET", prefix+"/git/ref/heads/main")["object"]["sha"]
     try:
@@ -160,6 +160,8 @@ def publish_pr(s, gh, submission):
     with connect(s) as db:
         files = publication_files(s, submission, db)
     changed = gh.request("GET", prefix+f"/pulls/{submission['pr_number']}/files", params={"per_page":100})
+    if len(changed) >= 100:
+        raise ValueError("自动发布涉及的文件过多，请拆分地点层级；不能省略后续文件检查")
     if {f["filename"] for f in changed}-set(files) or any(f["status"] not in ("added", "modified") for f in changed):
         raise ValueError("自动发布仅接受本次模型与地点的 JSON 文件")
     for path, expected in files.items():
@@ -184,7 +186,7 @@ def publish_pr(s, gh, submission):
             return False
         if db.execute("SELECT value FROM meta WHERE key='auto_publish'").fetchone()[0] != "true":
             return False
-        validate_submission(db, submission["task_id"], submission["owner"], model)
+        validate_submission(db, submission["task_id"], submission["owner"], model, accepted=True)
         if not pr.get("merged"):
             # GitHub atomically checks the exact head SHA; local transaction protects source/revision state.
             result = gh.request("PUT", prefix+f"/pulls/{submission['pr_number']}/merge", json={"sha":pr["head"]["sha"], "merge_method":"squash"})
@@ -223,7 +225,7 @@ def process_one(s, renderer=check_render, gh=None):
     try:
         if submission["state"] in ("queued", "preview_queued"):
             with connect(s) as db:
-                validate_submission(db, submission["task_id"], submission["owner"], ModelPart.model_validate_json(submission["document"]))
+                validate_submission(db, submission["task_id"], submission["owner"], ModelPart.model_validate_json(submission["document"]), accepted=True)
             if not update(s, submission["id"], "preview_checking" if preview_only else "checking"):
                 return True
             report = renderer(s, submission)

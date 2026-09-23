@@ -71,6 +71,16 @@ def test_checked_package_auto_merges_and_publishes(claimed):
     assert t['receipt'] not in dump(tree) and t['photo_id'] not in dump(tree)
 
 
+def test_accepted_submission_survives_source_access_lease_expiry(claimed):
+    s,c,h,t,m=claimed;gh,sub=publish(claimed)
+    with connect(s,True) as db:
+        db.execute('UPDATE tasks SET claim_until=? WHERE id=?',(now()-1,t['task_id']))
+    assert c.get(f"/api/v1/tasks/{t['task_id']}/photos/{t['photo_id']}",headers=h).status_code==403
+    process_one(s,gh=gh)
+    assert gh.merges==1
+    assert c.get('/api/v1/submissions/'+sub['id']).json()['state']=='published'
+
+
 @pytest.mark.parametrize('tamper',['extra_file','changed_head'])
 def test_changed_code_or_head_cannot_auto_publish(claimed,tamper):
     s,c,h,t,m=claimed;gh,sub=publish(claimed);setattr(gh,tamper,True)

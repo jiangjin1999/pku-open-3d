@@ -46,4 +46,4 @@ node scripts/contribute.mjs status <submission_id>
 
 常见状态：`preview_ready` 为预览就绪；`waiting_setup` 是维护者尚未完成 GitHub App 配置；`pr_open` 正在处理 PR；`published` 已发布但仍待核实；`failed/changes_requested` 给出可处理原因。检查失败、越界文件和版本冲突不会替换现有模型。
 
-认领 24 小时后可对同一任务再次运行 `claim` 续期；主动放弃可运行 `release`。已提交的任务由原认领者续期。完成后删除不再需要的本地原照；不自动转向下一项任务。
+已经接受的模型提交可在队列中继续处理，不因照片访问期限到期而自动作废；过期后下载照片仍需续期。认领 24 小时后可对同一任务再次运行 `claim` 续期；主动放弃可运行 `release`。已提交的任务由原认领者续期。完成后删除不再需要的本地原照；不自动转向下一项任务。

@@ -154,8 +154,13 @@ def complete_observation(settings, observation_id, receipt):
     return {"id": observation_id, "state": state}
 
 
-def validate_submission(db, task_id, login, model):
-    task = require_claim(db, task_id, login)
+def validate_submission(db, task_id, login, model, accepted=False):
+    if accepted:
+        task = db.execute("SELECT * FROM tasks WHERE id=?", (task_id,)).fetchone()
+        if not task or task["claimant"] != login:
+            problem(409, "任务认领者已变更，请重新领取资料")
+    else:
+        task = require_claim(db, task_id, login)
     if model.task_id != task_id or model.place_id != task["place_id"]:
         problem(422, "模型必须对应当前任务和地点")
     if task["state"] not in ("claimed", "submitted", "changes_requested"):
